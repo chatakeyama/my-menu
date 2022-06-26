@@ -1,0 +1,17 @@
+.list {
+    max-width: 56rem;
+
+    &__image {
+        margin-right: 2rem;
+    }
+    &__title > .MuiTypography-root {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: #000;
+    }
+}
+
+.list > .MuiListItem-root{
+    display: flex;
+    align-items: center;
+}
