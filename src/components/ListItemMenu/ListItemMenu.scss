@@ -1,17 +1,22 @@
 .list {
-    max-width: 56rem;
+    width: 100%;
+    max-width: 30rem;
+}
 
-    &__image {
-        margin-right: 2rem;
+.MuiListItemAvatar-root {
+    padding-right: 2rem;
+}
+
+.list-item {
+    .MuiListItemText-primary > &__title {
+        font-weight: bold;
     }
-    &__title > .MuiTypography-root {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-        color: #000;
+    &__price {
+        font-weight: bold;
+    }
+    &__img.MuiAvatar-root.MuiAvatar-circular {
+        width: 5rem;
+        height: 5rem;
     }
 }
 
-.list > .MuiListItem-root{
-    display: flex;
-    align-items: center;
-}

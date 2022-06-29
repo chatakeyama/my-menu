@@ -1,46 +1,78 @@
+import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import './ListItemMenu.scss';
 
-import Checkbox from '@mui/material/Checkbox';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const ListItemMenu = () => {
+
+    const [checked, setChecked] = React.useState([1]);
+
+    const handleToggle = (value) => () => {
+        const currentIndex = checked.indexOf(value);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(value);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+
+        setChecked(newChecked);
+    };
+
+
+    const getListItemPrimaryText = (text: string): any => {
+        return <span className="list-item__title">{text}</span>
+    }
+
+    const getListItemSecondaryText = (text: string): any => {
+        return (
+            <>
+                <span>{text}
+                </span>
+                <br />
+                <span className="list-item__price">R$24,00</span>
+            </>
+        )
+    }
+
     return (
-        <List className="list" sx={{ bgcolor: 'background.paper' }}>
-            <ListItem alignItems="flex-start" className="list__item">
-                <ListItemAvatar className="list__image">
-                    <Avatar alt="Remy Sharp" src="/assets/salada_primavera.jpeg"
-                        sx={{ width: 80, height: 80 }} />
-                </ListItemAvatar>
-                <ListItemText className="list__title"
-                    primary="Salada primavera"
-                    secondary={
-                        <>
-                            <Typography
-                                color="text.primary"
-                                variant="body2">
-                                Entrada: Salada porteña ou empanada de carne. Principal: 1/2 galeto desossado com purê de
-                                 batata e arroz com brócolis. Sobremesa: Pudim de leite, Churros ou fruta do dia.
-                            </Typography>
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                variant="body1"
-                                color="text.primary">
-                                R$25,00
-                            </Typography>
-                        </>
-                    }
-                />
-                <Checkbox {...label} />
-            </ListItem>
+        <List dense className="list">
+            {[0].map((value) => {
+                const labelId = `checkbox-list-secondary-label-${value}`;
+                return (
+                    <ListItem key={value} className="list-item"
+                        secondaryAction={
+                            <Checkbox
+                                edge="end"
+                                onChange={handleToggle(value)}
+                                checked={checked.indexOf(value) !== -1}
+                                inputProps={{ 'aria-labelledby': labelId }}
+                            />
+                        }>
+                        <ListItemAvatar>
+                            <Avatar className="list-item__img" 
+                                alt={`Avatar n°${value + 1}`}
+                                src={`assets/salada_primavera.jpeg`}
+                            />
+                        </ListItemAvatar>
+                        <ListItemText id={labelId}
+                            primary={getListItemPrimaryText('Salada primavera')}
+                            secondary={getListItemSecondaryText(`Agrião, rúcula, cebola, 
+                            tomate cereja e molho de vinagre balsâmico.`)}
+                        />
+                    </ListItem>
+                );
+            })}
         </List>
     );
+
 }
+
 export default ListItemMenu
 
