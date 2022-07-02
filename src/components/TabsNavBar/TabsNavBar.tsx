@@ -2,9 +2,9 @@ import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import './Header.scss'
+import './TabsNavBar.scss'
 
-const Header = () => {
+const TabsNavBar = () => {
     const [value, setValue] = React.useState(0);
 
     const categories = ['Saladas', 'Carnes', 'Peixes', 'Aves', 'Vegano', 'Sobremesa', 'Bebidas']
@@ -15,8 +15,6 @@ const Header = () => {
 
     return (
         <>
-        <div className="brand">LOGO</div>
-        <Box>
             <Tabs
                 value={value}
                 onChange={handleChange}
@@ -26,9 +24,8 @@ const Header = () => {
                 aria-label="scrollable force tabs example">
                 {categories.map(c => { return (<Tab key={c} label={c} />) })}
             </Tabs>
-        </Box>
         </>
     )
 }
 
-export default Header;
+export default TabsNavBar;

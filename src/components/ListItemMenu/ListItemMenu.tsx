@@ -44,6 +44,8 @@ const ListItemMenu = () => {
         }
 
         setChecked(newChecked);
+
+        console.log(newChecked)
     };
 
 

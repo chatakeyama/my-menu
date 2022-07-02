@@ -1,12 +1,14 @@
 import './App.scss';
-import Header from './components/Header/Header.tsx';
+import TabsNavBar from './components/TabsNavBar/TabsNavBar.tsx';
 import ListItemMenu from './components/ListItemMenu/ListItemMenu.tsx';
+import SearchBar from './components/SearchBar/SearchBar.tsx';
 
 function App() {
   return (
     <>
       <div className="container">
-        <Header />
+        <SearchBar />
+        <TabsNavBar />
         <main className="main-content">
           <ListItemMenu />
         </main>
