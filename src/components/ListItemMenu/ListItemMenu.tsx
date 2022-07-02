@@ -5,6 +5,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import './ListItemMenu.scss';
 
 
@@ -64,33 +66,42 @@ const ListItemMenu = () => {
     }
 
     return (
-        <List dense className="list">
-            {dishes.map((meal) => {
-                const labelId = `checkbox-list-secondary-label-${meal.id}`;
-                return (
-                    <ListItem key={meal.id} className="list-item"
-                        secondaryAction={
-                            <Checkbox
-                                edge="end"
-                                onChange={handleToggle(meal.id)}
-                                checked={checked.indexOf(meal.id) !== -1}
-                                inputProps={{ 'aria-labelledby': labelId }}
+        <>
+            <List dense className="list">
+                {dishes.map((meal) => {
+                    const labelId = `checkbox-list-secondary-label-${meal.id}`;
+                    return (
+                        <ListItem key={meal.id} className="list-item"
+                            secondaryAction={
+                                <Checkbox
+                                    edge="end"
+                                    onChange={handleToggle(meal.id)}
+                                    checked={checked.indexOf(meal.id) !== -1}
+                                    inputProps={{ 'aria-labelledby': labelId }}
+                                />
+                            }>
+                            <ListItemAvatar>
+                                <Avatar className="list-item__img"
+                                    alt={`Avatar n°${meal.id + 1}`}
+                                    src={`assets/salada_primavera.jpeg`}
+                                />
+                            </ListItemAvatar>
+                            <ListItemText id={labelId}
+                                primary={getListItemPrimaryText(meal.title)}
+                                secondary={getListItemSecondaryText(meal)}
                             />
-                        }>
-                        <ListItemAvatar>
-                            <Avatar className="list-item__img"
-                                alt={`Avatar n°${meal.id + 1}`}
-                                src={`assets/salada_primavera.jpeg`}
-                            />
-                        </ListItemAvatar>
-                        <ListItemText id={labelId}
-                            primary={getListItemPrimaryText(meal.title)}
-                            secondary={getListItemSecondaryText(meal)}
-                        />
-                    </ListItem>
-                );
-            })}
-        </List>
+                        </ListItem>
+                    );
+                })}
+            </List>
+            {checked.length > 0 &&
+                <span className="order">
+                    <Button variant="contained" size="medium" startIcon={<ReceiptIcon />}>
+                        Ver pedido
+                    </Button>
+                </span>
+            }
+        </>
     );
 
 }
