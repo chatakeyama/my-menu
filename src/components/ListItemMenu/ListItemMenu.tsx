@@ -10,6 +10,27 @@ import './ListItemMenu.scss';
 
 const ListItemMenu = () => {
 
+    const dishes = [
+        {
+            id: 1,
+            title: 'Salada primavera',
+            description: 'Agrião, rúcula, cebola, tomate cereja e molho de vinagre balsâmico.',
+            price: '24.00'
+        },
+        {
+            id: 2,
+            title: 'Filé mignon',
+            description: 'Carne filé mignon ao molho madeira com legumes grelhados.',
+            price: '80.00'
+        },
+        {
+            id: 3,
+            title: 'Salmão',
+            description: 'Salmão assado com limão siciliano',
+            price: '50.00'
+        }
+    ]
+
     const [checked, setChecked] = React.useState([1]);
 
     const handleToggle = (value) => () => {
@@ -30,41 +51,39 @@ const ListItemMenu = () => {
         return <span className="list-item__title">{text}</span>
     }
 
-    const getListItemSecondaryText = (text: string): any => {
+    const getListItemSecondaryText = (meal: any): any => {
         return (
             <>
-                <span>{text}
-                </span>
+                <span>{meal.description}</span>
                 <br />
-                <span className="list-item__price">R$24,00</span>
+                <span className="list-item__price">R${meal.price}</span>
             </>
         )
     }
 
     return (
         <List dense className="list">
-            {[0].map((value) => {
-                const labelId = `checkbox-list-secondary-label-${value}`;
+            {dishes.map((meal) => {
+                const labelId = `checkbox-list-secondary-label-${meal.id}`;
                 return (
-                    <ListItem key={value} className="list-item"
+                    <ListItem key={meal.id} className="list-item"
                         secondaryAction={
                             <Checkbox
                                 edge="end"
-                                onChange={handleToggle(value)}
-                                checked={checked.indexOf(value) !== -1}
+                                onChange={handleToggle(meal.id)}
+                                checked={checked.indexOf(meal.id) !== -1}
                                 inputProps={{ 'aria-labelledby': labelId }}
                             />
                         }>
                         <ListItemAvatar>
-                            <Avatar className="list-item__img" 
-                                alt={`Avatar n°${value + 1}`}
+                            <Avatar className="list-item__img"
+                                alt={`Avatar n°${meal.id + 1}`}
                                 src={`assets/salada_primavera.jpeg`}
                             />
                         </ListItemAvatar>
                         <ListItemText id={labelId}
-                            primary={getListItemPrimaryText('Salada primavera')}
-                            secondary={getListItemSecondaryText(`Agrião, rúcula, cebola, 
-                            tomate cereja e molho de vinagre balsâmico.`)}
+                            primary={getListItemPrimaryText(meal.title)}
+                            secondary={getListItemSecondaryText(meal)}
                         />
                     </ListItem>
                 );

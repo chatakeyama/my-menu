@@ -5,10 +5,12 @@ import ListItemMenu from './components/ListItemMenu/ListItemMenu.tsx';
 function App() {
   return (
     <>
-      <Header />
-      <main className="main-content">
-        <ListItemMenu />
-      </main>
+      <div className="container">
+        <Header />
+        <main className="main-content">
+          <ListItemMenu />
+        </main>
+      </div>
     </>
   );
 }
