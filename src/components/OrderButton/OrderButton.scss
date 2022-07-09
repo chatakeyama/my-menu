@@ -1,0 +1,11 @@
+.order > .MuiButton-root {
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.order {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+}

@@ -5,57 +5,49 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import ReceiptIcon from '@mui/icons-material/Receipt';
 import './ListItemMenu.scss';
+import Dish from '../../interfaces/Dish';
 
 
-const ListItemMenu = () => {
+const ListItemMenu = ({ setOrder, order }) => {
 
-    const dishes = [
+    const dishes: Dish[] = [
         {
-            id: 1,
+            id: 10,
             title: 'Salada primavera',
             description: 'Agrião, rúcula, cebola, tomate cereja e molho de vinagre balsâmico.',
-            price: '24.00'
+            price: 24.00
         },
         {
-            id: 2,
+            id: 12,
             title: 'Filé mignon',
             description: 'Carne filé mignon ao molho madeira com legumes grelhados.',
-            price: '80.00'
+            price: 80.00
         },
         {
-            id: 3,
+            id: 43,
             title: 'Salmão',
             description: 'Salmão assado com limão siciliano',
-            price: '50.00'
+            price: 50.00
         }
     ]
 
-    const [checked, setChecked] = React.useState([1]);
-
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
+    const handleToggle = (selectedMeal: Dish) => {
+        const currentIndex = order.findIndex(meal => selectedMeal.id === meal.id);
+        const newChecked = [...order];
         if (currentIndex === -1) {
-            newChecked.push(value);
+            newChecked.push(selectedMeal);
         } else {
             newChecked.splice(currentIndex, 1);
         }
-
-        setChecked(newChecked);
-
-        console.log(newChecked)
+        setOrder(newChecked);
     };
-
 
     const getListItemPrimaryText = (text: string): any => {
         return <span className="list-item__title">{text}</span>
     }
 
-    const getListItemSecondaryText = (meal: any): any => {
+    const getListItemSecondaryText = (meal: Dish): any => {
         return (
             <>
                 <span>{meal.description}</span>
@@ -68,39 +60,32 @@ const ListItemMenu = () => {
     return (
         <>
             <List dense className="list">
-                {dishes.map((meal) => {
-                    const labelId = `checkbox-list-secondary-label-${meal.id}`;
+                {dishes.map((currentMeal: Dish) => {
+                    const labelId = `checkbox-list-secondary-label-${currentMeal.id}`;
                     return (
-                        <ListItem key={meal.id} className="list-item"
+                        <ListItem key={currentMeal.id} className="list-item"
                             secondaryAction={
                                 <Checkbox
                                     edge="end"
-                                    onChange={handleToggle(meal.id)}
-                                    checked={checked.indexOf(meal.id) !== -1}
+                                    onChange={() => handleToggle(currentMeal)}
+                                    checked={order.findIndex(meal => currentMeal.id === meal.id) !== -1}
                                     inputProps={{ 'aria-labelledby': labelId }}
                                 />
                             }>
                             <ListItemAvatar>
                                 <Avatar className="list-item__img"
-                                    alt={`Avatar n°${meal.id + 1}`}
+                                    alt={`Avatar n°${currentMeal.id + 1}`}
                                     src={`assets/salada_primavera.jpeg`}
                                 />
                             </ListItemAvatar>
                             <ListItemText id={labelId}
-                                primary={getListItemPrimaryText(meal.title)}
-                                secondary={getListItemSecondaryText(meal)}
+                                primary={getListItemPrimaryText(currentMeal.title)}
+                                secondary={getListItemSecondaryText(currentMeal)}
                             />
                         </ListItem>
                     );
                 })}
             </List>
-            {checked.length > 0 &&
-                <span className="order">
-                    <Button variant="contained" size="medium" startIcon={<ReceiptIcon />}>
-                        Ver pedido
-                    </Button>
-                </span>
-            }
         </>
     );
 
