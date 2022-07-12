@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.scss';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
-import Order from './components/Order/Order.tsx';
+import About from './routes/about/About.tsx';
 import HomePage from './routes/menu/Menu.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -14,7 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="menu" element={<HomePage />} />
-          <Route path="order" element={<Order />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </BrowserRouter>
