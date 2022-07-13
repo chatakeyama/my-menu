@@ -1,15 +1,16 @@
 import ListItemMenu from '../../components/ListItemMenu/ListItemMenu.tsx';
 import OrderButton from '../../components/OrderButton/OrderButton.tsx';
-import { useState } from 'react';
 import React from 'react';
+import { useOrderContext, useOrderContextUpdate } from '../../contexts/OrderContext.tsx'
 
 function Menu() {
 
-  const [order, setOrder] = useState([]);
+  const order = useOrderContext()
+  const orderUpdate = useOrderContextUpdate()
 
   return (
     <>
-      <ListItemMenu setOrder={setOrder} order={order} />
+      <ListItemMenu order={order} setOrder={orderUpdate}/>
       <OrderButton order={order} />
     </>
   );
