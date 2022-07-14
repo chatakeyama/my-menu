@@ -6,6 +6,7 @@ import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
 import About from './routes/about/About.tsx';
 import HomePage from './routes/menu/Menu.tsx';
+import NotFound from './routes/not-found/NotFound.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="menu" element={<HomePage />} />
           <Route path="about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
