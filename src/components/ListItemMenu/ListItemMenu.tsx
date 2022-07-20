@@ -7,30 +7,20 @@ import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
 import './ListItemMenu.scss';
 import Dish from '../../interfaces/Dish';
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const ListItemMenu = ({ setOrder, order }) => {
 
-    const dishes: Dish[] = [
-        {
-            id: 10,
-            title: 'Salada primavera',
-            description: 'Agrião, rúcula, cebola, tomate cereja e molho de vinagre balsâmico.',
-            price: 24.00
-        },
-        {
-            id: 12,
-            title: 'Filé mignon',
-            description: 'Carne filé mignon ao molho madeira com legumes grelhados.',
-            price: 80.00
-        },
-        {
-            id: 43,
-            title: 'Salmão',
-            description: 'Salmão assado com limão siciliano',
-            price: 50.00
-        }
-    ]
+    const [dishes, setDishes] = useState([])
+
+    useEffect(() => { getData() }, [])
+
+    const getData = async () => {
+        const promise = axios.get('http://localhost:3000/dishes')
+        const { data } = await promise
+        setDishes(data)
+    }
 
     const handleToggle = (selectedMeal: Dish) => {
         const currentIndex = order.findIndex(meal => selectedMeal.id === meal.id);
