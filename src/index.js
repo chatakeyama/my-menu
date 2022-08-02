@@ -1,25 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './index.scss';
-import App from './App.tsx';
-import reportWebVitals from './reportWebVitals';
-import About from './routes/about/About.tsx';
-import HomePage from './routes/menu/Menu.tsx';
-import NotFound from './routes/not-found/NotFound.tsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.scss";
+import App from "./App.tsx";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="menu" element={<HomePage />} />
-          <Route path="about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <BrowserRouter>{<App />}</BrowserRouter>
   </React.StrictMode>
 );
 
