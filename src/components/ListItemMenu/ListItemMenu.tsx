@@ -1,14 +1,17 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import config from "../../config.json";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
-import './ListItemMenu.scss';
 import Dish from '../../interfaces/Dish';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import './ListItemMenu.scss';
+
+const apiEndpoint = config.apiUrl;
 
 const ListItemMenu = ({ setOrder, order }) => {
 
@@ -17,7 +20,7 @@ const ListItemMenu = ({ setOrder, order }) => {
     useEffect(() => { getData() }, [])
 
     const getData = async () => {
-        const promise = axios.get('http://localhost:3000/dishes')
+        const promise = axios.get(`${apiEndpoint}/dishes`)
         const { data } = await promise
         setDishes(data)
     }
