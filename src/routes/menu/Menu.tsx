@@ -4,7 +4,7 @@ import OrderButton from '../../components/OrderButton/OrderButton.tsx';
 import TabsNavBar from '../../components/TabsNavBar/TabsNavBar.tsx';
 import { useOrderContext, useOrderContextUpdate } from '../../contexts/OrderContext.tsx'
 
-function Menu() {
+function Menu({dishes}) {
 
   const order = useOrderContext()
   const orderUpdate = useOrderContextUpdate()
@@ -12,7 +12,7 @@ function Menu() {
   return (
     <>
       <TabsNavBar />
-      <ListItemMenu order={order} setOrder={orderUpdate}/>
+      <ListItemMenu order={order} setOrder={orderUpdate} dishes={dishes} />
       <OrderButton order={order} />
     </>
   );

@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import { search } from "../../services/filterService.tsx";
+import config from "../../config.json";
 import "./SearchBar.scss";
 
 const Search = styled("div")(({ theme }) => ({
@@ -50,11 +50,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
-  const handleOnChange = async (e: any) => {
-    const result = await search(e.target.value);
-    console.log(result)
-  };
+const apiEndpoint = config.apiUrl;
+
+export default function SearchAppBar({ handleOnChange }) {
 
   return (
     <AppBar position="fixed">
