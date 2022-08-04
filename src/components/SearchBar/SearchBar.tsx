@@ -5,7 +5,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import config from "../../config.json";
 import "./SearchBar.scss";
 
 const Search = styled("div")(({ theme }) => ({
@@ -50,7 +49,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const apiEndpoint = config.apiUrl;
 
 export default function SearchAppBar({ handleOnChange }) {
 
