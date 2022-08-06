@@ -12,9 +12,9 @@ import "./App.scss";
 
 export default function App() {
   const [dishes, setDishes] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const debounceSearchTerm = useDebounce(searchTerm, 2000);
+  const debounceSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
     loadDishes();
