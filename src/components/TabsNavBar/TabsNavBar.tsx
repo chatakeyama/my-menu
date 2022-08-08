@@ -1,31 +1,46 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import './TabsNavBar.scss'
+import React, { useEffect, useState } from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Category from "../../interfaces/Category";
+import config from "../../config.json";
+import { getCategories } from "../../services/MenuService.tsx";
+import "./TabsNavBar.scss";
+
+const apiUrl = config.apiUrl;
 
 const TabsNavBar = () => {
-    const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+    const [categories, setCategories] = useState([]);
 
-    const categories = ['Saladas', 'Carnes', 'Peixes', 'Aves', 'Vegano', 'Sobremesa', 'Bebidas']
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
+  const loadCategories = async () => {
+    const categories = await getCategories();
+    setCategories(categories);
+  };
 
-    return (
-        <>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                variant="scrollable"
-                scrollButtons
-                allowScrollButtonsMobile
-                aria-label="scrollable force tabs example">
-                {categories.map(c => { return (<Tab key={c} label={c} />) })}
-            </Tabs>
-        </>
-    )
-}
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        aria-label="scrollable force tabs example"
+      >
+        {categories.map((category: Category[]) => {
+          return <Tab key={category.id} label={category.name} />;
+        })}
+      </Tabs>
+    </>
+  );
+};
 
 export default TabsNavBar;

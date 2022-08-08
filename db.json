@@ -42,5 +42,19 @@
             "price": 8.00,
             "category": "bebida"
         }
+    ],
+    "categories": [
+        {
+            "id": 1,
+            "name": "salada"
+        },
+        {
+            "id": 2,
+            "name": "carne"
+        },
+        {
+            "id": 3,
+            "name": "bebida"
+        }
     ]
 }
