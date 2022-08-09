@@ -5,42 +5,48 @@
             "title": "Salada primavera",
             "description": "Agrião, rúcula, cebola, tomate cereja e molho de vinagre balsâmico.",
             "price": 24.00,
-            "category": "salada"
+            "categoryName": "salada",
+            "categoryId": 1
         },
         {
             "id": 2,
             "title": "Suco de laranja",
             "description": "Suco natural de laranja.",
             "price": 22.00,
-            "category": "bebida"
+            "categoryName": "bebida",
+            "categoryId": 3
         },
         {
             "id": 3,
             "title": "Filé mignon",
             "description": "Carne filé mignon ao molho madeira com legumes grelhados.",
             "price": 80.00,
-            "category": "carne"
+            "categoryName": "carne",
+            "categoryId": 2
         },
         {
             "id": 4,
             "title": "Salmão",
             "description": "Salmão assado com limão siciliano",
             "price": 50.00,
-            "category": "carne"
+            "categoryName": "carne",
+            "categoryId": 2
         },
         {
             "id": 5,
             "title": "Coca cola",
             "description": "Refrigerante",
             "price": 8.00,
-            "category": "bebida"
+            "categoryName": "bebida",
+            "categoryId": 3
         },
         {
             "id": 6,
             "title": "Suco de limão",
             "description": "Suco natural de limão.",
             "price": 8.00,
-            "category": "bebida"
+            "categoryName": "bebida",
+            "categoryId": 3
         }
     ],
     "categories": [
@@ -55,6 +61,14 @@
         {
             "id": 3,
             "name": "bebida"
+        },
+        {
+            "id": 4,
+            "name": "sobremesa"
+        },
+        {
+            "id": 5,
+            "name": "Sopas"
         }
     ]
 }

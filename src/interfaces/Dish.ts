@@ -4,5 +4,6 @@ export default interface Dish {
     title: string,
     description: string,
     price: number,
-    category: string
+    categoryName: string,
+    categoryId: number
 }

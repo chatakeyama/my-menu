@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useRef } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -10,15 +10,17 @@ import Dish from "../../interfaces/Dish";
 import "./ListItemMenu.scss";
 
 const ListItemMenu = ({ setOrder, order, dishes }) => {
-  const groupByCategory = (menu: Dish[]) => {
+
+  const categoryRef = useRef();
+
+  const groupByCategory = (menu: Dish[]): Array<[string, Dish[]]> => {
     const groups = menu.reduce((groups, item) => {
-      if (!groups[item.category]) {
-        groups[item.category] = [];
+      if (!groups[item.categoryName]) {
+        groups[item.categoryName] = [];
       }
-      groups[item.category].push(item);
+      groups[item.categoryName].push(item);
       return groups;
     }, {});
-
     return Object.entries(groups);
   };
 
@@ -55,7 +57,13 @@ const ListItemMenu = ({ setOrder, order, dishes }) => {
         {groupedDishes.map(([categoryName, categoryDishes]) => {
           return (
             <React.Fragment key={categoryName}>
-              <Typography ml={2} variant="subtitle1" >
+              <Typography
+                className="category-title"
+                ml={2} mt={3} mb={1}
+                variant="subtitle1"
+                id={categoryDishes[0].categoryId}
+                ref={categoryRef}
+              >
                 {categoryName}
               </Typography>
 
