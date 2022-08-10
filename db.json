@@ -5,70 +5,142 @@
             "title": "Salada primavera",
             "description": "Agrião, rúcula, cebola, tomate cereja e molho de vinagre balsâmico.",
             "price": 24.00,
-            "categoryName": "salada",
-            "categoryId": 1
+            "categoryName": "Saladas",
+            "categoryId": 2,
+            "image": "salada_primavera.jpeg"
         },
         {
             "id": 2,
             "title": "Suco de laranja",
             "description": "Suco natural de laranja.",
             "price": 22.00,
-            "categoryName": "bebida",
-            "categoryId": 3
+            "categoryName": "Bebidas",
+            "categoryId": 7,
+            "image": "suco_laranja.PNG"
         },
         {
             "id": 3,
             "title": "Filé mignon",
             "description": "Carne filé mignon ao molho madeira com legumes grelhados.",
             "price": 80.00,
-            "categoryName": "carne",
-            "categoryId": 2
+            "categoryName": "Carnes",
+            "categoryId": 3,
+            "image": "file_mignon.PNG"
         },
         {
             "id": 4,
             "title": "Salmão",
             "description": "Salmão assado com limão siciliano",
             "price": 50.00,
-            "categoryName": "carne",
-            "categoryId": 2
+            "categoryName": "Peixes",
+            "categoryId": 4,
+            "image": "salmao.PNG"
         },
         {
             "id": 5,
-            "title": "Coca cola",
+            "title": "Coca-cola",
             "description": "Refrigerante",
             "price": 8.00,
-            "categoryName": "bebida",
-            "categoryId": 3
+            "categoryName": "Bebidas",
+            "categoryId": 3,
+            "image": "coca_cola.PNG"
         },
         {
             "id": 6,
             "title": "Suco de limão",
             "description": "Suco natural de limão.",
             "price": 8.00,
-            "categoryName": "bebida",
-            "categoryId": 3
+            "categoryName": "Bebidas",
+            "categoryId": 3,
+            "image": "suco_limao.PNG"
+        },
+        {
+            "id": 7,
+            "title": "Macarrão penne com molho branco",
+            "description": "Macarrão penne com molho branco com queijo parmesão ralado.",
+            "price": 55.00,
+            "categoryName": "Massas",
+            "categoryId": 5,
+            "image": "macarrao_sugo.PNG"
+        },
+        {
+            "id": 8,
+            "title": "Macarrão espaguetti ao sugo",
+            "description": "Macarrão com molho de tomate.",
+            "price": 38.00,
+            "categoryName": "Massas",
+            "categoryId": 5,
+            "image": "macarrao_branco.PNG"
+        },
+        {
+            "id": 9,
+            "title": "Galeto desossado ",
+            "description": "Galeto desossado marinado no limão siciliano.",
+            "price": 55.00,
+            "categoryName": "Carnes",
+            "categoryId": 3,
+            "image": "galeto.PNG"
+        },
+        {
+            "id": 10,
+            "title": "Sopa de abóbora cabotchá",
+            "description": "Sopa de abóbora cabotchá com temperos da casa.",
+            "price": 45.00,
+            "categoryName": "Sopas",
+            "categoryId": 6,
+            "image": "sopa_abobora.PNG"
+        },
+        {
+            "id": 11,
+            "title": "Mousse de chocolate",
+            "description": "Mousse de chocolate meio amargo especial.",
+            "price": 25.00,
+            "categoryName": "Sobremesas",
+            "categoryId": 6,
+            "image": "mousse_chocolate.PNG"
+        },
+        {
+            "id": 12,
+            "title": "Porção de batatas fritas",
+            "description": "Porção de batatas fritas.",
+            "price": 18.00,
+            "categoryName": "Entradas",
+            "categoryId": 1,
+            "image": "batata_frita.PNG"
         }
     ],
     "categories": [
         {
             "id": 1,
-            "name": "salada"
+            "name": "Entradas"
         },
         {
             "id": 2,
-            "name": "carne"
+            "name": "Saladas"
         },
         {
             "id": 3,
-            "name": "bebida"
+            "name": "Carnes"
         },
         {
             "id": 4,
-            "name": "sobremesa"
+            "name": "Peixes"
         },
         {
             "id": 5,
+            "name": "Massas"
+        },
+        {
+            "id": 6,
             "name": "Sopas"
+        },
+        {
+            "id": 7,
+            "name": "Bebidas"
+        },
+        {
+            "id": 8,
+            "name": "Sobremesas"
         }
     ]
 }
