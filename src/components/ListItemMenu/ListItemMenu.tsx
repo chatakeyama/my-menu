@@ -90,7 +90,7 @@ const ListItemMenu = ({ setOrder, order, dishes }) => {
                       <Avatar
                         className="list-item__img"
                         alt={`Avatar n°${currentMeal.id + 1}`}
-                        src={`assets/salada_primavera.jpeg`}
+                        src={`assets/${currentMeal.image}`}
                       />
                     </ListItemAvatar>
                     <ListItemText
