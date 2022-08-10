@@ -25,10 +25,11 @@ const TabsNavBar = () => {
 
   return (
     <>
-        <ul className="navbar">
+      <div className="navbar">
+        <div className="navbar__list">
           {categories.map((category: Category[]) => {
             return (
-              <li className="navbar__item" key={category.id}>
+              <div className="navbar__item" key={category.id}>
                 <a
                   onClick={() => handleChange(category.id)}
                   className={
@@ -40,10 +41,11 @@ const TabsNavBar = () => {
                 >
                   {category.name}
                 </a>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
+      </div>
     </>
   );
 };
