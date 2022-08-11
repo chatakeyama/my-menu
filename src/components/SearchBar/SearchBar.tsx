@@ -14,7 +14,7 @@ export default function SearchAppBar({ handleOnChange }) {
   return (
     <AppBar position="fixed">
       <Toolbar>
-        <span className="logo-brand">LOGO</span>
+        <span className="logo-brand">My Menu</span>
         <Typography
           variant="h6"
           noWrap
