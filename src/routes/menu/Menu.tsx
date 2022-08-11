@@ -18,7 +18,7 @@ function Menu({ menuItems }) {
         setOrder={orderUpdate}
         menuItems={menuItems}
       />
-      <OrderButton order={order} />
+      <OrderButton order={order} setOrder={orderUpdate} />
     </>
   );
 }

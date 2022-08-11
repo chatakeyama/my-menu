@@ -4,7 +4,9 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./OrderButton.scss";
+import MenuItem from "../../interfaces/MenuItem";
 
 const style = {
   position: "absolute" as "absolute",
@@ -18,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function OrderButton({ order }) {
+export default function OrderButton({ order, setOrder }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,6 +29,13 @@ export default function OrderButton({ order }) {
     return order.reduce((total, item) => {
       return total + item.price;
     }, 0);
+  };
+
+  const removeFromOrder = (id: number) => {
+    const oderUpdated = order.filter((item: MenuItem) => {
+      return item.id !== id;
+    });
+    setOrder(oderUpdated);
   };
 
   return (
@@ -55,23 +64,37 @@ export default function OrderButton({ order }) {
             {order.map((menuItem) => {
               return (
                 <div className="order-item" key={menuItem.id}>
-                  <Typography
-                    className="order-item__dish"
-                    id="modal-modal-description"
-                    sx={{ mt: 2 }}
-                  >
-                    {menuItem.title}
-                  </Typography>
-                  <Typography
-                    className="order-item__price"
-                    id="modal-modal-description"
-                    sx={{ mt: 2 }}
-                  >
-                    R$ {menuItem.price.toLocaleString("pt-BR", {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-                  </Typography>
+                  <span>
+                    <Typography
+                      className="order-item__dish"
+                      id="modal-modal-description"
+                      sx={{ mt: 2 }}
+                    >
+                      {menuItem.title}
+                    </Typography>
+                    <Button
+                      mt={1}
+                      variant="outlined"
+                      size="small"
+                      onClick={() => removeFromOrder(menuItem.id)}
+                    >
+                      <DeleteIcon fontSize="inherit" />
+                      Remover
+                    </Button>
+                  </span>
+                  <span>
+                    <Typography
+                      className="order-item__price"
+                      id="modal-modal-description"
+                      sx={{ mt: 2 }}
+                    >
+                      R${" "}
+                      {menuItem.price.toLocaleString("pt-BR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </Typography>
+                  </span>
                 </div>
               );
             })}
