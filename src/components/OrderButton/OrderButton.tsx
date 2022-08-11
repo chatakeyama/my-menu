@@ -114,6 +114,11 @@ export default function OrderButton({ order, setOrder }) {
                 })}
               </Typography>
             </div>
+            <div className="btn-close">
+              <Button variant="contained" size="medium" onClick={handleClose}>
+                Fechar
+              </Button>
+            </div>
           </Box>
         </Modal>
       </>
