@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -10,9 +10,6 @@ import MenuItem from "../../interfaces/MenuItem";
 import "./ListItemMenu.scss";
 
 const ListItemMenu = ({ setOrder, order, menuItems }) => {
-
-  const categoryRef = useRef();
-
   const groupByCategory = (menu: MenuItem[]): Array<[string, MenuItem[]]> => {
     const groups = menu.reduce((groups, item) => {
       if (!groups[item.categoryName]) {
@@ -59,10 +56,11 @@ const ListItemMenu = ({ setOrder, order, menuItems }) => {
             <React.Fragment key={categoryName}>
               <Typography
                 className="category-title"
-                ml={2} mt={3} mb={1}
+                ml={2}
+                mt={3}
+                mb={1}
                 variant="subtitle1"
                 id={categoryMenuItems[0].categoryId}
-                ref={categoryRef}
               >
                 {categoryName}
               </Typography>
