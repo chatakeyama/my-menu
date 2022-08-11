@@ -6,7 +6,7 @@ import {
   useOrderContextUpdate,
 } from "../../contexts/OrderContext.tsx";
 
-function Menu({ dishes }) {
+function Menu({ menuItems }) {
   const order = useOrderContext();
   const orderUpdate = useOrderContextUpdate();
 
@@ -16,7 +16,7 @@ function Menu({ dishes }) {
       <ListItemMenu
         order={order}
         setOrder={orderUpdate}
-        dishes={dishes}
+        menuItems={menuItems}
       />
       <OrderButton order={order} />
     </>

@@ -1,5 +1,5 @@
 
-export default interface Dish {
+export default interface MenuItem {
     id: number,
     title: string,
     description: string,

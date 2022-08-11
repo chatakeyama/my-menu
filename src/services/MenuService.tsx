@@ -1,12 +1,12 @@
 import axios from "axios";
 import config from "../config.json";
-import Dish from "../interfaces/Dish";
+import MenuItem from "../interfaces/MenuItem";
 import Category from "../interfaces/Category";
 
 const apiEndpoint = config.apiUrl;
 
-export async function getAll(): Promise<Dish[]> {
-  const promise = axios.get(`${apiEndpoint}/dishes`);
+export async function getAll(): Promise<MenuItem[]> {
+  const promise = axios.get(`${apiEndpoint}/menuItems`);
   const { data } = await promise;
   return data;
 }
@@ -18,5 +18,5 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export function search(text: string) {
-  return axios.get(`${apiEndpoint}/dishes?title_like=${text}`);
+  return axios.get(`${apiEndpoint}/menuItems?title_like=${text}`);
 }

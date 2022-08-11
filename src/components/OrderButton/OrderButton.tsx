@@ -52,22 +52,22 @@ export default function OrderButton({ order }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Seu pedido:
             </Typography>
-            {order.map((dish) => {
+            {order.map((menuItem) => {
               return (
-                <div className="order-item" key={dish.id}>
+                <div className="order-item" key={menuItem.id}>
                   <Typography
                     className="order-item__dish"
                     id="modal-modal-description"
                     sx={{ mt: 2 }}
                   >
-                    {dish.title}
+                    {menuItem.title}
                   </Typography>
                   <Typography
                     className="order-item__price"
                     id="modal-modal-description"
                     sx={{ mt: 2 }}
                   >
-                    R$ {dish.price.toLocaleString("pt-BR", {
+                    R$ {menuItem.price.toLocaleString("pt-BR", {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}

@@ -11,27 +11,27 @@ import NotFound from "./routes/not-found/NotFound.tsx";
 import "./App.scss";
 
 export default function App() {
-  const [dishes, setDishes] = useState([]);
+  const [menuItem, setMenuItem] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const debounceSearchTerm = useDebounce(searchTerm, 1000);
 
   useEffect(() => {
-    loadDishes();
+    loadMenuItems();
   }, []);
 
   useEffect(() => {
-    searchDish(debounceSearchTerm);
+    searchMenuItem(debounceSearchTerm);
   }, [debounceSearchTerm]);
 
-  const loadDishes = async () => {
+  const loadMenuItems = async () => {
     const allMenu = await getAll();
-    setDishes(allMenu);
+    setMenuItem(allMenu);
   };
 
-  const searchDish = async (text: string) => {
+  const searchMenuItem = async (text: string) => {
     const { data } = await search(text);
-    setDishes(data);
+    setMenuItem(data);
   };
 
   return (
@@ -41,7 +41,7 @@ export default function App() {
           <SearchBar handleOnChange={(e) => setSearchTerm(e.target.value)} />
           <div className="outlet-content">
             <Routes>
-              <Route path="/" element={<Menu dishes={dishes} />} />
+              <Route path="/" element={<Menu menuItems={menuItem} />} />
               <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
