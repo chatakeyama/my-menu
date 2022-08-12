@@ -66,7 +66,8 @@ const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
                   ml={2}
                   mt={3}
                   mb={1}
-                  variant="subtitle1"
+                  variant="subtitle1" 
+                  id={categoryMenuItems[0].categoryId}
                 >
                   {categoryName}
                 </Typography>
