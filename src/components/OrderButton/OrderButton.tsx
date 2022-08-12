@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Button from "@mui/material/Button";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import DeleteIcon from "@mui/icons-material/Delete";
-import "./OrderButton.scss";
-import MenuItem from "../../interfaces/MenuItem";
+import React, { useState } from "react"
+import Button from "@mui/material/Button"
+import ReceiptIcon from "@mui/icons-material/Receipt"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Modal from "@mui/material/Modal"
+import DeleteIcon from "@mui/icons-material/Delete"
+import MenuItem from "../../interfaces/MenuItem"
+import "./OrderButton.scss"
 
 const style = {
   position: "absolute" as "absolute",
@@ -18,25 +18,30 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
-};
+}
 
-export default function OrderButton({ order, setOrder }) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+type OrderButtonProps = {
+  order: MenuItem[]
+  setOrder: (order: MenuItem[]) => void
+}
+
+export default function OrderButton({ order, setOrder }: OrderButtonProps) {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   const calculateTotalPriceOrder = (): number => {
     return order.reduce((total, item) => {
-      return total + item.price;
-    }, 0);
-  };
+      return total + item.price
+    }, 0)
+  }
 
-  const removeFromOrder = (id: number) => {
+  const removeFromOrder = (id: number): void => {
     const oderUpdated = order.filter((item: MenuItem) => {
-      return item.id !== id;
-    });
-    setOrder(oderUpdated);
-  };
+      return item.id !== id
+    })
+    setOrder(oderUpdated)
+  }
 
   return (
     order?.length > 0 && (
@@ -61,7 +66,7 @@ export default function OrderButton({ order, setOrder }) {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Seu pedido:
             </Typography>
-            {order.map((menuItem) => {
+            {order.map((menuItem: MenuItem) => {
               return (
                 <div className="order-item" key={menuItem.id}>
                   <span>
@@ -73,7 +78,6 @@ export default function OrderButton({ order, setOrder }) {
                       {menuItem.title}
                     </Typography>
                     <Button
-                      mt={1}
                       variant="outlined"
                       size="small"
                       onClick={() => removeFromOrder(menuItem.id)}
@@ -96,7 +100,7 @@ export default function OrderButton({ order, setOrder }) {
                     </Typography>
                   </span>
                 </div>
-              );
+              )
             })}
             <div className="order-total">
               <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -123,5 +127,5 @@ export default function OrderButton({ order, setOrder }) {
         </Modal>
       </>
     )
-  );
+  )
 }

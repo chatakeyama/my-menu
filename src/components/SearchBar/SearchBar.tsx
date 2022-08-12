@@ -1,16 +1,16 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import SearchIcon from "@mui/icons-material/Search";
-import "./SearchBar.scss";
-import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "./SearchBarStyle.ts";
+import React, { SyntheticEvent } from "react"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import SearchIcon from "@mui/icons-material/Search"
+import "./SearchBar.scss"
+import { Search, SearchIconWrapper, StyledInputBase } from "./SearchBarStyle.ts"
 
-export default function SearchAppBar({ handleOnChange }) {
+type SearchBarProps = {
+  handleOnChange: (e: SyntheticEvent) => void
+}
+
+export default function SearchAppBar({ handleOnChange }: SearchBarProps) {
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -33,5 +33,5 @@ export default function SearchAppBar({ handleOnChange }) {
         </Search>
       </Toolbar>
     </AppBar>
-  );
+  )
 }
