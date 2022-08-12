@@ -1,7 +1,12 @@
 .logo-brand {
     font-size: 1rem;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
-.MuiToolbar-root{
+.MuiToolbar-root {
     padding: 0.7rem;
 }
