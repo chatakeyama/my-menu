@@ -1,14 +1,20 @@
-import ListItemMenu from "../../components/ListItemMenu/ListItemMenu.tsx";
-import OrderButton from "../../components/OrderButton/OrderButton.tsx";
-import TabsNavBar from "../../components/TabsNavBar/TabsNavBar.tsx";
+import React from "react"
+import ListItemMenu from "../../components/ListItemMenu/ListItemMenu.tsx"
+import OrderButton from "../../components/OrderButton/OrderButton.tsx"
+import TabsNavBar from "../../components/TabsNavBar/TabsNavBar.tsx"
 import {
   useOrderContext,
   useOrderContextUpdate,
-} from "../../contexts/OrderContext.tsx";
+} from "../../contexts/OrderContext.tsx"
+import MenuItem from "../../interfaces/MenuItem"
 
-function Menu({ menuItems }) {
-  const order = useOrderContext();
-  const orderUpdate = useOrderContextUpdate();
+type MenuItemProps = {
+  menuItems: MenuItem[]
+}
+
+function Menu({ menuItems }: MenuItemProps) {
+  const order = useOrderContext()
+  const orderUpdate = useOrderContextUpdate()
 
   return (
     <>
@@ -20,7 +26,7 @@ function Menu({ menuItems }) {
       />
       <OrderButton order={order} setOrder={orderUpdate} />
     </>
-  );
+  )
 }
 
-export default Menu;
+export default Menu
