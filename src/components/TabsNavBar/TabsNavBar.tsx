@@ -1,33 +1,30 @@
-import React, { useEffect, useState } from "react";
-import Category from "../../interfaces/Category";
-import config from "../../config.json";
-import { getCategories } from "../../services/MenuService.tsx";
-import "./TabsNavBar.scss";
-
-const apiUrl = config.apiUrl;
+import React, { useEffect, useState } from "react"
+import Category from "../../interfaces/Category"
+import { getCategories } from "../../services/MenuService.tsx"
+import "./TabsNavBar.scss"
 
 const TabsNavBar = () => {
-  const [selectedCategory, setSelectedCategory] = useState(1);
-  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(1)
+  const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(() => {
-    loadCategories();
-  }, []);
+    loadCategories()
+  }, [])
 
   const loadCategories = async () => {
-    const categories = await getCategories();
-    setCategories(categories);
-  };
+    const categories = await getCategories()
+    setCategories(categories)
+  }
 
-  const handleChange = (categoryId: number) => {
-    setSelectedCategory(categoryId);
-  };
+  const handleChange = (categoryId: number): void => {
+    setSelectedCategory(categoryId)
+  }
 
   return (
     <>
       <div className="navbar">
         <div className="navbar__list">
-          {categories.map((category: Category[]) => {
+          {categories.map((category: Category) => {
             return (
               <div className="navbar__item" key={category.id}>
                 <a
@@ -42,12 +39,12 @@ const TabsNavBar = () => {
                   {category.name}
                 </a>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default TabsNavBar;
+export default TabsNavBar
