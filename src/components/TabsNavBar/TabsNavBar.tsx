@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Category from "../../interfaces/Category"
-import { getCategories } from "../../services/MenuService.tsx"
+import { getCategories } from "../../services/MenuService.ts"
 import "./TabsNavBar.scss"
 
 const TabsNavBar = () => {
