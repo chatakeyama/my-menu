@@ -11,18 +11,19 @@ import About from "./routes/about/About.tsx"
 import NotFound from "./routes/not-found/NotFound.tsx"
 import Unavaiable from "./routes/unavailable/Unavailable.tsx"
 import MenuItem from "./interfaces/MenuItem.js"
-import "react-toastify/dist/ReactToastify.css"
 import "./App.scss"
 
 export default function App() {
   const [menuItems, setMenuItem] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
+  const [showSearchInput, setShowSearchInput] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
 
   useEffect(() => {
     if (location.pathname === "/") {
+      setShowSearchInput(true)
       loadMenuItems()
     }
   }, [])
@@ -36,9 +37,8 @@ export default function App() {
       const allMenu = await getAll()
       setMenuItem(allMenu)
     } catch (exception) {
-      if (exception.response?.status === 404) {
-        navigate("/unavailable")
-      }
+      setShowSearchInput(false)
+      navigate("/unavailable")
     }
   }
 
@@ -51,7 +51,10 @@ export default function App() {
     <>
       {
         <OrderProvider>
-          <SearchBar handleOnChange={(e) => setSearchTerm(e.target.value)} />
+          <SearchBar
+            showSearchInput={showSearchInput}
+            handleOnChange={(e) => setSearchTerm(e.target.value)}
+          />
           <div className="outlet-content">
             <Routes>
               <Route path="/" element={<Menu menuItems={menuItems} />} />

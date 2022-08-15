@@ -3,24 +3,18 @@ import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import SearchIcon from "@mui/icons-material/Search"
-import { useLocation } from "react-router-dom"
 import { Search, SearchIconWrapper, StyledInputBase } from "./SearchBarStyle.ts"
 import "./SearchBar.scss"
 
 type SearchBarProps = {
   handleOnChange: (e: SyntheticEvent) => void
+  showSearchInput: boolean
 }
 
-export default function SearchAppBar({ handleOnChange }: SearchBarProps) {
-  const location = useLocation()
-
-  const showSearchInput = () => {
-    if (location.pathname === "/") {
-      return true
-    }
-    return false
-  }
-
+export default function SearchAppBar({
+  handleOnChange,
+  showSearchInput,
+}: SearchBarProps) {
   return (
     <AppBar position="fixed">
       <Toolbar>
@@ -33,7 +27,7 @@ export default function SearchAppBar({ handleOnChange }: SearchBarProps) {
           component="div"
           sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
         ></Typography>
-        {showSearchInput() ? (
+        {showSearchInput === true ? (
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
