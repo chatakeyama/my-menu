@@ -1,24 +1,30 @@
 import React from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
-import { search, getAll } from "./services/MenuService.tsx"
+import { search, getAll } from "./services/MenuService.ts"
 import SearchBar from "./components/SearchBar/SearchBar.tsx"
 import { OrderProvider } from "./contexts/OrderContext.tsx"
 import Menu from "./routes/menu/Menu.tsx"
 import About from "./routes/about/About.tsx"
 import NotFound from "./routes/not-found/NotFound.tsx"
-import "./App.scss"
+import Unavaiable from "./routes/unavailable/Unavailable.tsx"
 import MenuItem from "./interfaces/MenuItem.js"
+import "react-toastify/dist/ReactToastify.css"
+import "./App.scss"
 
 export default function App() {
   const [menuItems, setMenuItem] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
-    loadMenuItems()
+    if (location.pathname === "/") {
+      loadMenuItems()
+    }
   }, [])
 
   useEffect(() => {
@@ -26,8 +32,14 @@ export default function App() {
   }, [debounceSearchTerm])
 
   const loadMenuItems = async () => {
-    const allMenu = await getAll()
-    setMenuItem(allMenu)
+    try {
+      const allMenu = await getAll()
+      setMenuItem(allMenu)
+    } catch (exception) {
+      if (exception.response?.status === 404) {
+        navigate("/unavailable")
+      }
+    }
   }
 
   const searchMenuItem = async (text: string) => {
@@ -44,6 +56,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Menu menuItems={menuItems} />} />
               <Route path="/about" element={<About />} />
+              <Route path="/unavailable" element={<Unavaiable />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
