@@ -1,22 +1,22 @@
-import axios from "axios"
 import config from "../config.json"
 import MenuItem from "../interfaces/MenuItem"
 import Category from "../interfaces/Category"
+import http from "./HttpService.ts"
 
 const apiEndpoint = config.apiUrl
 
 export async function getAll(): Promise<MenuItem[]> {
-  const promise = axios.get(`${apiEndpoint}/menuItems`)
+  const promise = http.get(`${apiEndpoint}/menuItems`)
   const { data } = await promise
   return data
 }
 
 export async function getCategories(): Promise<Category[]> {
-  const promise = axios.get(`${apiEndpoint}/categories`)
+  const promise = http.get(`${apiEndpoint}/categories`)
   const { data } = await promise
   return data
 }
 
 export function search(text: string): Promise<MenuItem[]> {
-  return axios.get(`${apiEndpoint}/menuItems?title_like=${text}`)
+  return http.get(`${apiEndpoint}/menuItems?title_like=${text}`)
 }
