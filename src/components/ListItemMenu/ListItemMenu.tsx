@@ -6,6 +6,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar"
 import Checkbox from "@mui/material/Checkbox"
 import Avatar from "@mui/material/Avatar"
 import Typography from "@mui/material/Typography"
+import Container from "@mui/material/Container"
 import MenuItem from "../../interfaces/MenuItem"
 import "./ListItemMenu.scss"
 
@@ -57,6 +58,13 @@ const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
   return (
     <>
       <List dense className="list">
+        {groupedMenuItems.length < 1 ? (
+          <Container>
+            <p>Item não encontrado.</p>
+          </Container>
+        ) : (
+          ""
+        )}
         {groupedMenuItems.map(
           ([categoryName, categoryMenuItems]: [string, MenuItem[]]) => {
             return (
@@ -66,7 +74,7 @@ const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
                   ml={2}
                   mt={3}
                   mb={1}
-                  variant="subtitle1" 
+                  variant="subtitle1"
                   id={categoryMenuItems[0].categoryId}
                 >
                   {categoryName}
