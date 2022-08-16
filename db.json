@@ -78,7 +78,7 @@
             "description": "Mousse de chocolate meio amargo especial.",
             "price": 25.00,
             "categoryName": "Sobremesas",
-            "categoryId": 6,
+            "categoryId": 8,
             "image": "mousse_chocolate.PNG"
         },
         {
@@ -87,7 +87,7 @@
             "description": "Refrigerante",
             "price": 8.00,
             "categoryName": "Bebidas",
-            "categoryId": 3,
+            "categoryId": 7,
             "image": "coca_cola.PNG"
         },
         {
@@ -105,7 +105,7 @@
             "description": "Suco natural de limão.",
             "price": 8.00,
             "categoryName": "Bebidas",
-            "categoryId": 3,
+            "categoryId": 7,
             "image": "suco_limao.PNG"
         }
     ],
