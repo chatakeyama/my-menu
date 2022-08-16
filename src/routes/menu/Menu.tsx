@@ -18,7 +18,7 @@ function Menu({ menuItems }: MenuItemProps) {
 
   return (
     <>
-      <TabsNavBar />
+      {menuItems.length > 0 && <TabsNavBar />}
       <ListItemMenu
         order={order}
         setOrder={orderUpdate}
