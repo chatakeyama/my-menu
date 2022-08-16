@@ -71,9 +71,6 @@ const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
               <React.Fragment key={categoryName}>
                 <Typography
                   className="category-title"
-                  ml={2}
-                  mt={3}
-                  mb={1}
                   variant="subtitle1"
                   id={categoryMenuItems[0].categoryId}
                 >

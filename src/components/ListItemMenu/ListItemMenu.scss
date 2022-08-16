@@ -3,7 +3,7 @@
 }
 
 .MuiListItemAvatar-root {
-    padding-right: 2rem;
+    padding-right: 1.3rem;
 }
 
 .MuiList-root.list {
@@ -11,7 +11,13 @@
 }
 
 .category-title {
-    scroll-margin-top: 8rem;
+    scroll-margin-top: 8.5rem;
+    margin-top: 1rem !important;
+    margin-bottom: 0.4rem !important ;
+}
+
+.MuiListItem-root.list-item {
+    padding-left: 0;
 }
 
 .list-item {
