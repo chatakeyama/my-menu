@@ -16,6 +16,7 @@ import "./App.scss"
 export default function App() {
   const [menuItems, setMenuItem] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
+  const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
   const [showSearchInput, setShowSearchInput] = useState(false)
   const navigate = useNavigate()
@@ -29,6 +30,11 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    if (searchTerm.length > 0) {
+      setActiveSearch(true)
+    } else {
+      setActiveSearch(false)
+    }
     searchMenuItem(debounceSearchTerm)
   }, [debounceSearchTerm])
 
@@ -57,7 +63,12 @@ export default function App() {
           />
           <div className="outlet-content">
             <Routes>
-              <Route path="/" element={<Menu menuItems={menuItems} />} />
+              <Route
+                path="/"
+                element={
+                  <Menu menuItems={menuItems} activeSearch={activeSearch} />
+                }
+              />
               <Route path="/about" element={<About />} />
               <Route path="/unavailable" element={<Unavaiable />} />
               <Route path="*" element={<NotFound />} />
