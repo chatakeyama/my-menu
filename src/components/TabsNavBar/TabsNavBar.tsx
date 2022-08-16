@@ -6,7 +6,7 @@ import "./TabsNavBar.scss"
 const TabsNavBar = () => {
   const [selectedCategory, setSelectedCategory] = useState(1)
   const [categories, setCategories] = useState<Category[]>([])
-  const [httpError, setHttpError] = useState(false)
+  const [display, setDisplay] = useState(false)
 
   useEffect(() => {
     loadCategories()
@@ -17,7 +17,7 @@ const TabsNavBar = () => {
       const categories = await getCategories()
       setCategories(categories)
     } catch (exception) {
-      setHttpError(true)
+      setDisplay(true)
     }
   }
 
@@ -27,7 +27,7 @@ const TabsNavBar = () => {
 
   return (
     <>
-      {!httpError && (
+      {!display && (
         <div className="navbar">
           <div className="navbar__list">
             {categories &&
