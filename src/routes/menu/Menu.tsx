@@ -12,10 +12,11 @@ import MenuItem from "../../interfaces/MenuItem"
 
 type MenuItemProps = {
   menuItems: MenuItem[]
-  activeSearch: boolean
+  activeSearch: boolean,
+  resetSearchResult: () => void
 }
 
-function Menu({ menuItems, activeSearch }: MenuItemProps) {
+function Menu({ menuItems, activeSearch, resetSearchResult }: MenuItemProps) {
   const order = useOrderContext()
   const orderUpdate = useOrderContextUpdate()
 
@@ -29,7 +30,7 @@ function Menu({ menuItems, activeSearch }: MenuItemProps) {
           menuItems={menuItems}
         />
         {activeSearch && (
-          <Button variant="text" href="/">
+          <Button variant="text" onClick={resetSearchResult}>
             Voltar
           </Button>
         )}

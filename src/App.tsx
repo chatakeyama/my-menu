@@ -62,6 +62,12 @@ export default function App() {
     setMenuItemsToDisplay(allMenuItems)
   }
 
+  const resetMenuItemsToInialValues = () => {
+    setAllMenuItems(allMenuItems)
+    setMenuItemsToDisplay(allMenuItems)
+    setSearchTerm("")
+  }
+
   return (
     <>
       {
@@ -69,6 +75,7 @@ export default function App() {
           <SearchBar
             showSearchInput={showSearchInput}
             handleOnChange={(e) => setSearchTerm(e.target.value)}
+            searchInputValue={searchTerm}
           />
           <div className="outlet-content">
             <Routes>
@@ -78,6 +85,7 @@ export default function App() {
                   <Menu
                     menuItems={menuItemsToDisplay}
                     activeSearch={activeSearch}
+                    resetSearchResult={resetMenuItemsToInialValues}
                   />
                 }
               />

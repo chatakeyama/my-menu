@@ -9,11 +9,13 @@ import "./SearchBar.scss"
 type SearchBarProps = {
   handleOnChange: (e: SyntheticEvent) => void
   showSearchInput: boolean
+  searchInputValue: string
 }
 
 export default function SearchAppBar({
   handleOnChange,
   showSearchInput,
+  searchInputValue,
 }: SearchBarProps) {
   return (
     <AppBar position="fixed">
@@ -36,6 +38,7 @@ export default function SearchAppBar({
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onChange={handleOnChange}
+              value={searchInputValue}
             />
           </Search>
         ) : (
