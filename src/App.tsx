@@ -24,11 +24,14 @@ export default function App() {
   const location = useLocation()
 
   useEffect(() => {
+    loadMenuItems()
+  }, [])
+
+  useEffect(() => {
     if (location.pathname === "/") {
       setShowSearchInput(true)
-      loadMenuItems()
     }
-  }, [])
+  })
 
   useEffect(() => {
     if (searchTerm.length > 0) {
@@ -68,6 +71,16 @@ export default function App() {
     setSearchTerm("")
   }
 
+  const navigateToHome = () => {
+    navigate("/")
+    setActiveSearch(true)
+    if (menuItemsToDisplay.length < 1) {
+      loadMenuItems()
+      return
+    }
+    resetMenuItemsToInialValues()
+  }
+
   return (
     <>
       {
@@ -76,6 +89,7 @@ export default function App() {
             showSearchInput={showSearchInput}
             handleOnChange={(e) => setSearchTerm(e.target.value)}
             searchInputValue={searchTerm}
+            goHomePage={navigateToHome}
           />
           <div className="outlet-content">
             <Routes>

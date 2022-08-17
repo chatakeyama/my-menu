@@ -10,18 +10,20 @@ type SearchBarProps = {
   handleOnChange: (e: SyntheticEvent) => void
   showSearchInput: boolean
   searchInputValue: string
+  goHomePage: (e: SyntheticEvent) => void
 }
 
 export default function SearchAppBar({
   handleOnChange,
   showSearchInput,
   searchInputValue,
+  goHomePage,
 }: SearchBarProps) {
   return (
     <AppBar position="fixed">
       <Toolbar>
         <span className="logo-brand">
-          <a href="/">My Menu</a>
+          <a onClick={goHomePage}>My Menu</a>
         </span>
         <Typography
           variant="h6"
