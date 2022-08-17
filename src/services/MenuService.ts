@@ -16,7 +16,3 @@ export async function getCategories(): Promise<Category[]> {
   const { data } = await promise
   return data
 }
-
-export function search(text: string): Promise<MenuItem[]> {
-  return http.get(`${apiEndpoint}/menuItems?title_like=${text}`)
-}

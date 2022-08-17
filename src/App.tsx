@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
-import { search, getAll } from "./services/MenuService.ts"
+import { getAll } from "./services/MenuService.ts"
 import SearchBar from "./components/SearchBar/SearchBar.tsx"
 import { OrderProvider } from "./contexts/OrderContext.tsx"
 import Menu from "./routes/menu/Menu.tsx"
@@ -14,7 +14,8 @@ import MenuItem from "./interfaces/MenuItem.js"
 import "./App.scss"
 
 export default function App() {
-  const [menuItems, setMenuItem] = useState<MenuItem[]>([])
+  const [menuItemsToDisplay, setMenuItemsToDisplay] = useState<MenuItem[]>([])
+  const [allMenuItems, setAllMenuItems] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
@@ -41,7 +42,8 @@ export default function App() {
   const loadMenuItems = async () => {
     try {
       const allMenu = await getAll()
-      setMenuItem(allMenu)
+      setAllMenuItems(allMenu)
+      setMenuItemsToDisplay(allMenu)
     } catch (exception) {
       setShowSearchInput(false)
       navigate("/unavailable")
@@ -49,8 +51,15 @@ export default function App() {
   }
 
   const searchMenuItem = async (text: string) => {
-    const { data } = await search(text)
-    setMenuItem(data)
+    if (text.length > 0) {
+      const result = allMenuItems.filter((item: MenuItem) => {
+        let regex = new RegExp(text, "i")
+        return regex.test(item.title)
+      })
+      setMenuItemsToDisplay(result)
+      return
+    }
+    setMenuItemsToDisplay(allMenuItems)
   }
 
   return (
@@ -66,7 +75,10 @@ export default function App() {
               <Route
                 path="/"
                 element={
-                  <Menu menuItems={menuItems} activeSearch={activeSearch} />
+                  <Menu
+                    menuItems={menuItemsToDisplay}
+                    activeSearch={activeSearch}
+                  />
                 }
               />
               <Route path="/about" element={<About />} />
