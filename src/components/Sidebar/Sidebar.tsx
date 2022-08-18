@@ -1,6 +1,6 @@
 import * as React from "react"
-import { SyntheticEvent } from "react"
-import { Search, SearchIconWrapper, StyledInputBase } from "./SidebarStyle.ts"
+import { SyntheticEvent, useState } from "react"
+import { Link } from "react-router-dom"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import { styled, useTheme } from "@mui/material/styles"
@@ -19,7 +19,8 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import SearchIcon from "@mui/icons-material/Search"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import { Link } from "react-router-dom"
+import { Search, StyledInputBase } from "./SidebarStyle.ts"
+import "./Sidebar.scss"
 
 const drawerWidth = 240
 
@@ -47,9 +48,13 @@ export default function Sidebar({
   goHomePage,
   window,
 }: SidebarProps) {
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+  }
+  const [searchInputToggle, setSearchInputToggle] = useState(false)
+  const handleSearchToggle = () => {
+    setSearchInputToggle(!searchInputToggle)
   }
 
   const theme = useTheme()
@@ -101,7 +106,7 @@ export default function Sidebar({
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -114,22 +119,30 @@ export default function Sidebar({
           <span className="logo-brand">
             <a onClick={goHomePage}>My Menu</a>
           </span>
-          {showSearchInput === true ? (
+          <SearchIcon
+            onClick={handleSearchToggle}
+            style={
+              showSearchInput
+                ? { visibility: "visible" }
+                : { visibility: "hidden" }
+            }
+          />
+        </Toolbar>
+
+        {searchInputToggle ? (
+          <div className="searchInputArea">
             <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder="Busque um item"
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleOnChange}
                 value={searchInputValue}
               />
             </Search>
-          ) : (
-            ""
-          )}
-        </Toolbar>
+          </div>
+        ) : (
+          ""
+        )}
       </AppBar>
       <Box
         component="nav"
