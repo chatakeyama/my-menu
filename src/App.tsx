@@ -4,12 +4,12 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
 import { getAll } from "./services/MenuService.ts"
-import SearchBar from "./components/SearchBar/SearchBar.tsx"
 import { OrderProvider } from "./contexts/OrderContext.tsx"
 import Menu from "./routes/menu/Menu.tsx"
 import About from "./routes/about/About.tsx"
 import NotFound from "./routes/not-found/NotFound.tsx"
 import Unavaiable from "./routes/unavailable/Unavailable.tsx"
+import Sidebar from "./components/Sidebar/Sidebar.tsx"
 import MenuItem from "./interfaces/MenuItem.js"
 import "./App.scss"
 
@@ -85,7 +85,7 @@ export default function App() {
     <>
       {
         <OrderProvider>
-          <SearchBar
+          <Sidebar
             showSearchInput={showSearchInput}
             handleOnChange={(e) => setSearchTerm(e.target.value)}
             searchInputValue={searchTerm}
