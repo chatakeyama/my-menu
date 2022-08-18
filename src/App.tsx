@@ -30,6 +30,8 @@ export default function App() {
   useEffect(() => {
     if (location.pathname === "/") {
       setShowSearchInput(true)
+    } else {
+      setShowSearchInput(false)
     }
   })
 
