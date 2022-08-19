@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SyntheticEvent, useState } from "react"
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
@@ -26,7 +25,7 @@ const drawerWidth = 240
 
 type SidebarProps = {
   handleOnChange: (e: SyntheticEvent) => void
-  showSearchInput: boolean
+  showSearchIcon: boolean
   searchInputValue: string
   goHomePage: (e: SyntheticEvent) => void
   window?: () => Window
@@ -43,11 +42,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Sidebar({
   handleOnChange,
-  showSearchInput,
+  showSearchIcon,
   searchInputValue,
   goHomePage,
   window,
 }: SidebarProps) {
+  const searchInputElement = useRef<HTMLInputElement>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -56,6 +56,11 @@ export default function Sidebar({
   const handleSearchToggle = () => {
     setSearchInputToggle(!searchInputToggle)
   }
+
+  useEffect(() => {
+    if (searchInputToggle)
+      searchInputElement.current?.getElementsByTagName("input")[0].focus()
+  }, [searchInputToggle])
 
   const theme = useTheme()
 
@@ -122,7 +127,7 @@ export default function Sidebar({
           <SearchIcon
             onClick={handleSearchToggle}
             style={
-              showSearchInput
+              showSearchIcon
                 ? { visibility: "visible" }
                 : { visibility: "hidden" }
             }
@@ -133,6 +138,7 @@ export default function Sidebar({
           <div className="searchInputArea">
             <Search>
               <StyledInputBase
+                ref={searchInputElement}
                 placeholder="Busque um item"
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleOnChange}

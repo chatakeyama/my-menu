@@ -19,7 +19,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
-  const [showSearchInput, setShowSearchInput] = useState(false)
+  const [showSearchIcon, setShowSearchIcon] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -29,9 +29,9 @@ export default function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setShowSearchInput(true)
+      setShowSearchIcon(true)
     } else {
-      setShowSearchInput(false)
+      setShowSearchIcon(false)
     }
   })
 
@@ -50,7 +50,7 @@ export default function App() {
       setAllMenuItems(allMenu)
       setMenuItemsToDisplay(allMenu)
     } catch (exception) {
-      setShowSearchInput(false)
+      setShowSearchIcon(false)
       navigate("/unavailable")
     }
   }
@@ -88,7 +88,7 @@ export default function App() {
       {
         <OrderProvider>
           <Sidebar
-            showSearchInput={showSearchInput}
+            showSearchIcon={showSearchIcon}
             handleOnChange={(e) => setSearchTerm(e.target.value)}
             searchInputValue={searchTerm}
             goHomePage={navigateToHome}
