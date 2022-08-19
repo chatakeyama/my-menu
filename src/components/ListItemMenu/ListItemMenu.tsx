@@ -56,8 +56,12 @@ const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
 
   return (
     <>
+      {groupedMenuItems.length < 1 ? (
+        <p className="not-found-message">Item não encontrado.</p>
+      ) : (
+        ""
+      )}
       <List dense className="list">
-        {groupedMenuItems.length < 1 ? <p>Item não encontrado.</p> : ""}
         {groupedMenuItems.map(
           ([categoryName, categoryMenuItems]: [string, MenuItem[]]) => {
             return (
