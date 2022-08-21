@@ -49,10 +49,13 @@ export default function Sidebar({
 }: SidebarProps) {
   const searchInputElement = useRef<HTMLInputElement>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchInputToggle, setSearchInputToggle] = useState(false)
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
+    setSearchInputToggle(false)
   }
-  const [searchInputToggle, setSearchInputToggle] = useState(false)
+
   const handleSearchToggle = () => {
     setSearchInputToggle(!searchInputToggle)
   }

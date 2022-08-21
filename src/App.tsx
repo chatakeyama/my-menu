@@ -67,10 +67,11 @@ export default function App() {
     setMenuItemsToDisplay(allMenuItems)
   }
 
-  const resetMenuItemsToInialValues = () => {
+  const resetToInialValues = () => {
     setAllMenuItems(allMenuItems)
     setMenuItemsToDisplay(allMenuItems)
     setSearchTerm("")
+    setActiveSearch(false)
   }
 
   const navigateToHome = () => {
@@ -80,7 +81,7 @@ export default function App() {
       loadMenuItems()
       return
     }
-    resetMenuItemsToInialValues()
+    resetToInialValues()
   }
 
   return (
@@ -101,7 +102,7 @@ export default function App() {
                   <Menu
                     menuItems={menuItemsToDisplay}
                     activeSearch={activeSearch}
-                    resetSearchResult={resetMenuItemsToInialValues}
+                    resetSearchResult={resetToInialValues}
                   />
                 }
               />

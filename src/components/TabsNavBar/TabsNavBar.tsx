@@ -3,22 +3,17 @@ import Category from "../../interfaces/Category"
 import { getCategories } from "../../services/MenuService.ts"
 import "./TabsNavBar.scss"
 
-const TabsNavBar = () => {
+const TabsNavBar = ({ display }) => {
   const [selectedCategory, setSelectedCategory] = useState(1)
   const [categories, setCategories] = useState<Category[]>([])
-  const [display, setDisplay] = useState(false)
 
   useEffect(() => {
     loadCategories()
-  }, [])
+  }, [display])
 
   const loadCategories = async () => {
-    try {
-      const categories = await getCategories()
-      setCategories(categories)
-    } catch (exception) {
-      setDisplay(true)
-    }
+    const categories = await getCategories()
+    setCategories(categories)
   }
 
   const handleChange = (categoryId: number): void => {
@@ -27,30 +22,31 @@ const TabsNavBar = () => {
 
   return (
     <>
-      {!display && (
-        <div className="navbar">
-          <div className="navbar__list">
-            {categories &&
-              categories.map((category: Category) => {
-                return (
-                  <div className="navbar__item" key={category.id}>
-                    <a
-                      onClick={() => handleChange(category.id)}
-                      className={
-                        selectedCategory == category.id
-                          ? "navbar__anchor active"
-                          : "navbar__anchor"
-                      }
-                      href={`#${category.id}`}
-                    >
-                      {category.name}
-                    </a>
-                  </div>
-                )
-              })}
-          </div>
+      <div className="navbar">
+        <div
+          className="navbar__list"
+          style={display ? { visibility: "visible" } : { visibility: "hidden" }}
+        >
+          {categories &&
+            categories.map((category: Category) => {
+              return (
+                <div className="navbar__item" key={category.id}>
+                  <a
+                    onClick={() => handleChange(category.id)}
+                    className={
+                      selectedCategory == category.id
+                        ? "navbar__anchor active"
+                        : "navbar__anchor"
+                    }
+                    href={`#${category.id}`}
+                  >
+                    {category.name}
+                  </a>
+                </div>
+              )
+            })}
         </div>
-      )}
+      </div>
     </>
   )
 }
