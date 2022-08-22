@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
@@ -19,21 +19,11 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState("")
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
-  const [showSearchIcon, setShowSearchIcon] = useState(false)
   const navigate = useNavigate()
-  const location = useLocation()
 
   useEffect(() => {
     loadMenuItems()
   }, [])
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setShowSearchIcon(true)
-    } else {
-      setShowSearchIcon(false)
-    }
-  })
 
   useEffect(() => {
     if (searchTerm.length > 0) {
@@ -50,7 +40,6 @@ export default function App() {
       setAllMenuItems(allMenu)
       setMenuItemsToDisplay(allMenu)
     } catch (exception) {
-      setShowSearchIcon(false)
       navigate("/unavailable")
     }
   }
@@ -89,7 +78,6 @@ export default function App() {
       {
         <OrderProvider>
           <Sidebar
-            showSearchIcon={showSearchIcon}
             handleOnChange={(e) => setSearchTerm(e.target.value)}
             searchInputValue={searchTerm}
             goHomePage={navigateToHome}

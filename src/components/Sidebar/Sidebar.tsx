@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import { styled, useTheme } from "@mui/material/styles"
@@ -42,14 +42,24 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function Sidebar({
   handleOnChange,
-  showSearchIcon,
   searchInputValue,
   goHomePage,
   window,
 }: SidebarProps) {
+  const location = useLocation()
+
   const searchInputElement = useRef<HTMLInputElement>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchInputToggle, setSearchInputToggle] = useState(false)
+  const [showSearchIcon, setShowSearchIcon] = useState(false)
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setShowSearchIcon(true)
+    } else {
+      setShowSearchIcon(false)
+    }
+  })
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
