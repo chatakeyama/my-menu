@@ -9,7 +9,7 @@ import Menu from "./routes/menu/Menu.tsx"
 import About from "./routes/about/About.tsx"
 import NotFound from "./routes/not-found/NotFound.tsx"
 import Unavaiable from "./routes/unavailable/Unavailable.tsx"
-import Sidebar from "./components/Sidebar/Sidebar.tsx"
+import Navbar from "./components/Navbar/Navbar.tsx"
 import MenuItem from "./interfaces/MenuItem.js"
 import "./App.scss"
 
@@ -77,7 +77,7 @@ export default function App() {
     <>
       {
         <OrderProvider>
-          <Sidebar
+          <Navbar
             handleOnChange={(e) => setSearchTerm(e.target.value)}
             searchInputValue={searchTerm}
             goHomePage={navigateToHome}

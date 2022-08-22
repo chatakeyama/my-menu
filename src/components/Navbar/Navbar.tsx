@@ -18,14 +18,13 @@ import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import SearchIcon from "@mui/icons-material/Search"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import { Search, StyledInputBase } from "./SidebarStyle.ts"
-import "./Sidebar.scss"
+import { Search, StyledInputBase } from "./NavbarStyle.ts"
+import "./Navbar.scss"
 
 const drawerWidth = 240
 
-type SidebarProps = {
+type NavbarProps = {
   handleOnChange: (e: SyntheticEvent) => void
-  showSearchIcon: boolean
   searchInputValue: string
   goHomePage: (e: SyntheticEvent) => void
   window?: () => Window
@@ -40,12 +39,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }))
 
-export default function Sidebar({
+export default function Navbar({
   handleOnChange,
   searchInputValue,
   goHomePage,
   window,
-}: SidebarProps) {
+}: NavbarProps) {
   const location = useLocation()
 
   const searchInputElement = useRef<HTMLInputElement>(null)
