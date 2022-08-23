@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "esModuleInterop": true, //for compatibility with Jest (and Babel):
+      "jsx": "react",
+      "resolveJsonModule": true
+    }
+}

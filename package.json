@@ -25,7 +25,8 @@
   "scripts": {
     "start": "concurrently \"npm run start-db-server\" \"set PORT=3001 && react-scripts start\"",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "eject": "react-scripts eject",
     "start-db-server": "json-server db.json"
   },
