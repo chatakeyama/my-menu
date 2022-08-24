@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
-import { getAll } from "./services/MenuService.ts"
-import { OrderProvider } from "./contexts/OrderContext.tsx"
-import Menu from "./routes/menu/Menu.tsx"
-import About from "./routes/about/About.tsx"
-import NotFound from "./routes/not-found/NotFound.tsx"
-import Unavaiable from "./routes/unavailable/Unavailable.tsx"
-import Navbar from "./components/Navbar/Navbar.tsx"
+import { getAll } from "./services/MenuService"
+import { OrderProvider } from "./contexts/OrderContext"
+import Menu from "./routes/menu/Menu"
+import About from "./routes/about/About"
+import NotFound from "./routes/not-found/NotFound"
+import Unavaiable from "./routes/unavailable/Unavailable"
+import Navbar from "./components/Navbar/Navbar"
 import MenuItem from "./interfaces/MenuItem.js"
 import "./App.scss"
 
@@ -78,7 +78,7 @@ export default function App() {
       {
         <OrderProvider>
           <Navbar
-            handleOnChange={(e) => setSearchTerm(e.target.value)}
+            handleOnChange={(e) => setSearchTerm((e.target as HTMLInputElement).value)}
             searchInputValue={searchTerm}
             goHomePage={navigateToHome}
           />

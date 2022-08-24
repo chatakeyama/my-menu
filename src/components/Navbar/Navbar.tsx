@@ -9,8 +9,8 @@ import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
 import SearchIcon from "@mui/icons-material/Search"
-import Sidebar from "./Sidebar/Sidebar.tsx"
-import { Search, StyledInputBase } from "./NavbarStyle.ts"
+import Sidebar from "./Sidebar/Sidebar"
+import { Search, StyledInputBase } from "./NavbarStyle"
 import "./Navbar.scss"
 
 const drawerWidth = 240

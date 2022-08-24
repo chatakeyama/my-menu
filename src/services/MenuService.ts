@@ -1,7 +1,7 @@
 import config from "../config.json"
 import MenuItem from "../interfaces/MenuItem"
 import Category from "../interfaces/Category"
-import http from "./HttpService.ts"
+import http from "./HttpService"
 
 const apiEndpoint = config.apiUrl
 

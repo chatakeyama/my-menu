@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
-import ListItemMenu from "../../components/ListItemMenu/ListItemMenu.tsx"
-import OrderButton from "../../components/OrderButton/OrderButton.tsx"
-import TabsNavBar from "../../components/TabsNavBar/TabsNavBar.tsx"
+import ListItemMenu from "../../components/ListItemMenu/ListItemMenu"
+import OrderButton from "../../components/OrderButton/OrderButton"
+import TabsNavBar from "../../components/TabsNavBar/TabsNavBar"
 import {
   useOrderContext,
   useOrderContextUpdate,
-} from "../../contexts/OrderContext.tsx"
+} from "../../contexts/OrderContext"
 import MenuItem from "../../interfaces/MenuItem"
 
 type MenuItemProps = {
