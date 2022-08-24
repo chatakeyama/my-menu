@@ -5,6 +5,6 @@ export default interface MenuItem {
     description: string,
     price: number,
     categoryName: string,
-    categoryId: number,
+    categoryId: string,
     image: string
 }

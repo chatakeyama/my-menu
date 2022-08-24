@@ -22,7 +22,7 @@ const style = {
 
 type OrderButtonProps = {
   order: MenuItem[]
-  setOrder: (order: MenuItem[]) => void
+  setOrder: (order: MenuItem[]) => MenuItem[]
 }
 
 export default function OrderButton({ order, setOrder }: OrderButtonProps) {

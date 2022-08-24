@@ -9,13 +9,13 @@ import Typography from "@mui/material/Typography"
 import MenuItem from "../../interfaces/MenuItem"
 import "./ListItemMenu.scss"
 
-type ListItemMenuPropos = {
-  setOrder: (order: MenuItem[]) => void
+type ListItemMenuProps = {
+  setOrder: (order: MenuItem[]) => MenuItem[]
   order: MenuItem[]
   menuItems: MenuItem[]
 }
 
-const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuPropos) => {
+const ListItemMenu = ({ setOrder, order, menuItems }: ListItemMenuProps) => {
   const groupByCategory = (menu: MenuItem[]): Array<[string, MenuItem[]]> => {
     const groups = menu.reduce((groups, item) => {
       if (!groups[item.categoryName]) {

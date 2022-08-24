@@ -1,23 +1,23 @@
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useState } from "react"
 import MenuItem from "../interfaces/MenuItem"
 
 type OrderProviderProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
-const OrderContext = React.createContext({});
-const OrderUpdateContext = React.createContext({});
+const OrderContext = React.createContext({})
+const OrderUpdateContext = React.createContext({})
 
 export function useOrderContext() {
-  return useContext(OrderContext);
+  return useContext(OrderContext) as MenuItem[]
 }
 
 export function useOrderContextUpdate() {
-  return useContext(OrderUpdateContext);
+  return useContext(OrderUpdateContext) as any
 }
 
 export function OrderProvider({ children }: OrderProviderProps) {
-  const [order, setOrder] = useState<MenuItem[]>([]);
+  const [order, setOrder] = useState<MenuItem[]>([])
 
   return (
     <OrderContext.Provider value={order}>
@@ -25,5 +25,5 @@ export function OrderProvider({ children }: OrderProviderProps) {
         {children}
       </OrderUpdateContext.Provider>
     </OrderContext.Provider>
-  );
+  )
 }
