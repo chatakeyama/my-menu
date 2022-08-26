@@ -22,7 +22,7 @@ const style = {
 
 type OrderButtonProps = {
   order: MenuItem[]
-  setOrder: (order: MenuItem[]) => MenuItem[]
+  setOrder: (order: MenuItem[]) => any
 }
 
 export default function OrderButton({ order, setOrder }: OrderButtonProps) {
@@ -57,6 +57,7 @@ export default function OrderButton({ order, setOrder }: OrderButtonProps) {
           </Button>
         </span>
         <Modal
+          data-testid="modal-order"
           open={open}
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
@@ -78,6 +79,7 @@ export default function OrderButton({ order, setOrder }: OrderButtonProps) {
                       {menuItem.title}
                     </Typography>
                     <Button
+                      data-testid={`delete-button-${menuItem.id}`}
                       variant="outlined"
                       size="small"
                       onClick={() => removeFromOrder(menuItem.id)}
