@@ -9,14 +9,21 @@ import {
   useOrderContextUpdate,
 } from "../../contexts/OrderContext"
 import MenuItem from "../../interfaces/MenuItem"
+import ErrorAlert from "../../components/ErrorAlert/ErrorAlert"
 
 type MenuItemProps = {
   menuItems: MenuItem[]
   activeSearch: boolean
   resetSearchResult: () => void
+  errorOnLoading: boolean
 }
 
-function Menu({ menuItems, activeSearch, resetSearchResult }: MenuItemProps) {
+function Menu({
+  menuItems,
+  activeSearch,
+  resetSearchResult,
+  errorOnLoading,
+}: MenuItemProps) {
   const order = useOrderContext()
   const orderUpdate = useOrderContextUpdate()
   const [displayCategoriesNavBar, setDisplayCategoriesNavBar] = useState(true)
@@ -30,22 +37,25 @@ function Menu({ menuItems, activeSearch, resetSearchResult }: MenuItemProps) {
   }, [])
 
   useEffect(() => {
-    if(activeSearch){
+    if (activeSearch) {
       setDisplayCategoriesNavBar(false)
       return
     }
     setDisplayCategoriesNavBar(true)
   }, [activeSearch])
 
+  let mainContent = (
+    <ListItemMenu order={order} setOrder={orderUpdate} menuItems={menuItems} />
+  )
+  if (errorOnLoading) {
+    mainContent = <ErrorAlert marginTop={6}/>
+  }
+
   return (
     <>
       <TabsNavBar display={displayCategoriesNavBar} />
       <Container>
-        <ListItemMenu
-          order={order}
-          setOrder={orderUpdate}
-          menuItems={menuItems}
-        />
+        {mainContent}
         {activeSearch && (
           <Button variant="text" onClick={resetSearchResult}>
             Voltar

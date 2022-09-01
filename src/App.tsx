@@ -17,6 +17,7 @@ export default function App() {
   const [menuItemsToDisplay, setMenuItemsToDisplay] = useState<MenuItem[]>([])
   const [allMenuItems, setAllMenuItems] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
+  const [errorOnLoading, setErrorOnLoading] = useState(false)
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
   const navigate = useNavigate()
@@ -40,7 +41,7 @@ export default function App() {
       setAllMenuItems(allMenu)
       setMenuItemsToDisplay(allMenu)
     } catch (exception) {
-      navigate("/unavailable")
+      setErrorOnLoading(true)
     }
   }
 
@@ -78,7 +79,9 @@ export default function App() {
       {
         <OrderProvider>
           <Navbar
-            handleOnChange={(e) => setSearchTerm((e.target as HTMLInputElement).value)}
+            handleOnChange={(e) =>
+              setSearchTerm((e.target as HTMLInputElement).value)
+            }
             searchInputValue={searchTerm}
             goHomePage={navigateToHome}
           />
@@ -91,11 +94,15 @@ export default function App() {
                     menuItems={menuItemsToDisplay}
                     activeSearch={activeSearch}
                     resetSearchResult={resetToInialValues}
+                    errorOnLoading={errorOnLoading}
                   />
                 }
               />
               <Route path="/about" element={<About />} />
-              <Route path="/unavailable" element={<Unavaiable />} />
+              <Route
+                path="/unavailable"
+                element={<Unavaiable/>}
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
