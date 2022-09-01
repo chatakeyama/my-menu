@@ -22,31 +22,35 @@ const TabsNavBar = ({ display }) => {
 
   return (
     <>
-      <div className="navbar">
-        <div
-          className="navbar__list"
-          style={display ? { visibility: "visible" } : { visibility: "hidden" }}
-        >
-          {categories &&
-            categories.map((category: Category) => {
-              return (
-                <div className="navbar__item" key={category.id}>
-                  <a
-                    onClick={() => handleChange(category.id)}
-                    className={
-                      selectedCategory == category.id
-                        ? "navbar__anchor active"
-                        : "navbar__anchor"
-                    }
-                    href={`#${category.id}`}
-                  >
-                    {category.name}
-                  </a>
-                </div>
-              )
-            })}
+      {categories.length > 0 && (
+        <div className="navbar">
+          <div
+            className="navbar__list"
+            style={
+              display ? { visibility: "visible" } : { visibility: "hidden" }
+            }
+          >
+            {categories &&
+              categories.map((category: Category) => {
+                return (
+                  <div className="navbar__item" key={category.id}>
+                    <a
+                      onClick={() => handleChange(category.id)}
+                      className={
+                        selectedCategory == category.id
+                          ? "navbar__anchor active"
+                          : "navbar__anchor"
+                      }
+                      href={`#${category.id}`}
+                    >
+                      {category.name}
+                    </a>
+                  </div>
+                )
+              })}
+          </div>
         </div>
-      </div>
+      )}
     </>
   )
 }
