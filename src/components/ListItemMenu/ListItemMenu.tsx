@@ -10,7 +10,7 @@ import MenuItem from "../../interfaces/MenuItem"
 import "./ListItemMenu.scss"
 
 type ListItemMenuProps = {
-  setOrder: (order: MenuItem[]) => MenuItem[]
+  setOrder: (order: MenuItem[]) => void
   order: MenuItem[]
   menuItems: MenuItem[]
 }

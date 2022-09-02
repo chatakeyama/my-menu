@@ -6,22 +6,26 @@ type OrderProviderProps = {
 }
 
 const OrderContext = React.createContext({})
-const OrderUpdateContext = React.createContext({})
+const OrderUpdateContext = React.createContext((order: MenuItem[]) => {})
 
 export function useOrderContext() {
   return useContext(OrderContext) as MenuItem[]
 }
 
 export function useOrderContextUpdate() {
-  return useContext(OrderUpdateContext) as any
+  return useContext(OrderUpdateContext)
 }
 
 export function OrderProvider({ children }: OrderProviderProps) {
   const [order, setOrder] = useState<MenuItem[]>([])
 
+  const updateOrder = (order: MenuItem[]) => {
+    setOrder(order)
+  }
+
   return (
     <OrderContext.Provider value={order}>
-      <OrderUpdateContext.Provider value={setOrder}>
+      <OrderUpdateContext.Provider value={updateOrder}>
         {children}
       </OrderUpdateContext.Provider>
     </OrderContext.Provider>
