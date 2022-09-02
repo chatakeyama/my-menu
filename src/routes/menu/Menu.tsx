@@ -8,6 +8,7 @@ import {
   useOrderContext,
   useOrderContextUpdate,
 } from "../../contexts/OrderContext"
+import { useServerErrorContext } from "../../contexts/ServerErrorContext"
 import MenuItem from "../../interfaces/MenuItem"
 import ErrorAlert from "../../components/ErrorAlert/ErrorAlert"
 
@@ -15,17 +16,12 @@ type MenuItemProps = {
   menuItems: MenuItem[]
   activeSearch: boolean
   resetSearchResult: () => void
-  errorOnLoading: boolean
 }
 
-function Menu({
-  menuItems,
-  activeSearch,
-  resetSearchResult,
-  errorOnLoading,
-}: MenuItemProps) {
+function Menu({ menuItems, activeSearch, resetSearchResult }: MenuItemProps) {
   const order = useOrderContext()
   const orderUpdate = useOrderContextUpdate()
+  const [serverError] = useServerErrorContext()
   const [displayCategoriesNavBar, setDisplayCategoriesNavBar] = useState(true)
 
   useEffect(() => {
@@ -47,8 +43,9 @@ function Menu({
   let mainContent = (
     <ListItemMenu order={order} setOrder={orderUpdate} menuItems={menuItems} />
   )
-  if (errorOnLoading) {
-    mainContent = <ErrorAlert marginTop={6}/>
+  
+  if (serverError) {
+    mainContent = <ErrorAlert marginTop={6} />
   }
 
   return (

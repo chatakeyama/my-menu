@@ -1,8 +1,6 @@
 import React, { SyntheticEvent, useEffect, useRef, useState } from "react"
-import { useLocation } from "react-router-dom"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
-import { useTheme } from "@mui/material/styles"
 import CssBaseline from "@mui/material/CssBaseline"
 import Drawer from "@mui/material/Drawer"
 import IconButton from "@mui/material/IconButton"
@@ -11,6 +9,7 @@ import Toolbar from "@mui/material/Toolbar"
 import SearchIcon from "@mui/icons-material/Search"
 import Sidebar from "./Sidebar/Sidebar"
 import { Search, StyledInputBase } from "./NavbarStyle"
+import { useServerErrorContext } from "../../contexts/ServerErrorContext"
 import "./Navbar.scss"
 
 const drawerWidth = 240
@@ -20,6 +19,7 @@ type NavbarProps = {
   searchInputValue: string
   goHomePage: (e: SyntheticEvent) => void
   window?: () => Window
+  isVisibleSearchIcon: boolean
 }
 
 export default function Navbar({
@@ -27,21 +27,12 @@ export default function Navbar({
   searchInputValue,
   goHomePage,
   window,
+  isVisibleSearchIcon,
 }: NavbarProps) {
-  const location = useLocation()
-
   const searchInputElement = useRef<HTMLInputElement>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [searchInputToggle, setSearchInputToggle] = useState(false)
-  const [showSearchIcon, setShowSearchIcon] = useState(false)
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setShowSearchIcon(true)
-    } else {
-      setShowSearchIcon(false)
-    }
-  })
+  const serverError = useServerErrorContext()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -57,7 +48,10 @@ export default function Navbar({
       searchInputElement.current?.getElementsByTagName("input")[0].focus()
   }, [searchInputToggle])
 
-  const theme = useTheme()
+  const iconSearchVisibility: React.CSSProperties =
+    serverError[0] || !isVisibleSearchIcon
+      ? { visibility: "hidden" }
+      : { visibility: "visible" }
 
   const container =
     window !== undefined ? () => window().document.body : undefined
@@ -81,11 +75,7 @@ export default function Navbar({
           </span>
           <SearchIcon
             onClick={handleSearchToggle}
-            style={
-              showSearchIcon
-                ? { visibility: "visible" }
-                : { visibility: "hidden" }
-            }
+            style={iconSearchVisibility}
           />
         </Toolbar>
 

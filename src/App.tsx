@@ -1,30 +1,39 @@
 import React from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import useDebounce from "./hooks/useDebounce.js"
 import { getAll } from "./services/MenuService"
-import { OrderProvider } from "./contexts/OrderContext"
 import Menu from "./routes/menu/Menu"
 import About from "./routes/about/About"
 import NotFound from "./routes/not-found/NotFound"
 import Unavaiable from "./routes/unavailable/Unavailable"
 import Navbar from "./components/Navbar/Navbar"
 import MenuItem from "./interfaces/MenuItem.js"
+import { useServerErrorContext } from "./contexts/ServerErrorContext"
 import "./App.scss"
 
 export default function App() {
   const [menuItemsToDisplay, setMenuItemsToDisplay] = useState<MenuItem[]>([])
   const [allMenuItems, setAllMenuItems] = useState<MenuItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-  const [errorOnLoading, setErrorOnLoading] = useState(false)
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
+  const [isVisibleSearchIcon, setIsVisibleSearchIcon] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const [serverError, updateServerError] = useServerErrorContext()
 
   useEffect(() => {
     loadMenuItems()
   }, [])
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setIsVisibleSearchIcon(true)
+    } else {
+      setIsVisibleSearchIcon(false)
+    }
+  })
 
   useEffect(() => {
     if (searchTerm.length > 0) {
@@ -40,8 +49,9 @@ export default function App() {
       const allMenu = await getAll()
       setAllMenuItems(allMenu)
       setMenuItemsToDisplay(allMenu)
+      updateServerError(false)
     } catch (exception) {
-      setErrorOnLoading(true)
+      updateServerError(true)
     }
   }
 
@@ -76,38 +86,31 @@ export default function App() {
 
   return (
     <>
-      {
-        <OrderProvider>
-          <Navbar
-            handleOnChange={(e) =>
-              setSearchTerm((e.target as HTMLInputElement).value)
+      <Navbar
+        handleOnChange={(e) =>
+          setSearchTerm((e.target as HTMLInputElement).value)
+        }
+        searchInputValue={searchTerm}
+        goHomePage={navigateToHome}
+        isVisibleSearchIcon={isVisibleSearchIcon}
+      />
+      <div className="outlet-content">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Menu
+                menuItems={menuItemsToDisplay}
+                activeSearch={activeSearch}
+                resetSearchResult={resetToInialValues}
+              />
             }
-            searchInputValue={searchTerm}
-            goHomePage={navigateToHome}
           />
-          <div className="outlet-content">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Menu
-                    menuItems={menuItemsToDisplay}
-                    activeSearch={activeSearch}
-                    resetSearchResult={resetToInialValues}
-                    errorOnLoading={errorOnLoading}
-                  />
-                }
-              />
-              <Route path="/about" element={<About />} />
-              <Route
-                path="/unavailable"
-                element={<Unavaiable/>}
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </OrderProvider>
-      }
+          <Route path="/about" element={<About />} />
+          <Route path="/unavailable" element={<Unavaiable />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </>
   )
 }
