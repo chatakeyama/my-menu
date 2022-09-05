@@ -33,7 +33,7 @@ export default function App() {
     } else {
       setIsVisibleSearchIcon(false)
     }
-  })
+  }, [location.pathname])
 
   useEffect(() => {
     if (searchTerm.length > 0) {
