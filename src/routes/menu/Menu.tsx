@@ -25,25 +25,17 @@ function Menu({ menuItems, activeSearch, resetSearchResult }: MenuItemProps) {
   const [displayCategoriesNavBar, setDisplayCategoriesNavBar] = useState(true)
 
   useEffect(() => {
-    if (activeSearch && menuItems.length > 0) {
+    if (activeSearch || menuItems.length === 0) {
       setDisplayCategoriesNavBar(false)
       return
     }
     setDisplayCategoriesNavBar(true)
-  }, [])
-
-  useEffect(() => {
-    if (activeSearch) {
-      setDisplayCategoriesNavBar(false)
-      return
-    }
-    setDisplayCategoriesNavBar(true)
-  }, [activeSearch])
+  }, [activeSearch, menuItems])
 
   let mainContent = (
     <ListItemMenu order={order} setOrder={orderUpdate} menuItems={menuItems} />
   )
-  
+
   if (serverError) {
     mainContent = <ErrorAlert marginTop={6} />
   }

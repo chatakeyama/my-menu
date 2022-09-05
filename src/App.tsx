@@ -76,7 +76,6 @@ export default function App() {
 
   const navigateToHome = () => {
     navigate("/")
-    setActiveSearch(true)
     if (menuItemsToDisplay.length < 1) {
       loadMenuItems()
       return
