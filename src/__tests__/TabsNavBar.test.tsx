@@ -1,5 +1,5 @@
 import TabsNavBar from "../components/TabsNavBar/TabsNavBar"
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, waitFor } from "../test-utils/custom-render"
 import React from "react"
 
 test("Displays the categories", async () => {
