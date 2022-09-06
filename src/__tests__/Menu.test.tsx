@@ -1,6 +1,6 @@
 import Menu from '../routes/menu/Menu'
 import React from 'react'
-import { render, screen } from '../test-utils/custom-render'
+import { render, screen } from '../__test-utils__/custom-render'
 
 test('Handles zero results from searching', async () => {
   render(

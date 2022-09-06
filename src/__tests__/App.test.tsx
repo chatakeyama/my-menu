@@ -1,4 +1,4 @@
-import { render, screen } from '../test-utils/custom-render'
+import { render, screen } from '../__test-utils__/custom-render'
 import { rest } from 'msw'
 import React from 'react'
 import App from '../App'
