@@ -1,7 +1,7 @@
 import React from "react"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { useEffect, useState } from "react"
-import useDebounce from "./hooks/useDebounce.js"
+import useDebounce from "./hooks/useDebounce"
 import { getAll } from "./services/MenuService"
 import Menu from "./routes/menu/Menu"
 import About from "./routes/about/About"
