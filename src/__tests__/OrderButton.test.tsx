@@ -32,7 +32,7 @@ describe('OrderButton', () => {
     expect(screen.getByText('R$ 35,50')).toBeInTheDocument()
   })
 
-  test('Shouldn\'t display order button if no item is selected', () => {
+  test("Shouldn't display order button if no item is selected", () => {
     const oderUpdated = null
     const order = null
     render(<OrderButton order={order} setOrder={oderUpdated} />)
