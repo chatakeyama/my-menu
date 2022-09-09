@@ -5,7 +5,8 @@
 
   
 
-Este projeto foi desenvolvido com o objetivo de colocar em prática o que foi aprendido sobre o ReactJs e testes. É uma aplicação que exibe o cardápio de um restaurante, separado por categorias. É possível selecionar os itens do menu e ver os itens do pedido, com o valor total.
+Este projeto foi desenvolvido com o objetivo de colocar em prática o que foi aprendido sobre o ReactJs e testes. É uma aplicação que exibe o cardápio de um restaurante, separado por categorias. É possível selecionar os itens do menu e ver os itens do pedido, com o valor total. Esta aplicação foi desenvolvida 
+tendo em mente que seu uso será por meio de celular, como acontece na maioria dos estabelecimentos.
 
   
 
@@ -30,7 +31,7 @@ A aplicação abrirá em seu navegador padrão no endereço
 [http://localhost:3001](http://localhost:3001)
 
 Para ser acessível a partir de outro dispositivo (celular/tablet), é necessário: - alterar o script "start-db-server" do package.json para "json-server --host <endereço IPV4 de sua máquina> db.json"
-- alterar no arquivo src/config.json, o valor de "apiUrl", trocando localhost pelo endereço de IPV4 da dua máquina,
+- alterar no arquivo src/config.json, o valor de "apiUrl", trocando localhost pelo endereço de IPV4 da sua máquina,
   ## Algumas Dependências utilizadas
   
  - Axios
@@ -51,4 +52,4 @@ Para ser acessível a partir de outro dispositivo (celular/tablet), é necessár
 
 - React-testing-library
 - Jest
-- Mocke Service Work
+- Mock Service Work
