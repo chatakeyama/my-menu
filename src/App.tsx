@@ -1,34 +1,34 @@
-import React from "react"
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
-import { useEffect, useState } from "react"
-import useDebounce from "./hooks/useDebounce"
-import { getAll } from "./services/MenuService"
-import Menu from "./routes/menu/Menu"
-import About from "./routes/about/About"
-import NotFound from "./routes/not-found/NotFound"
-import Unavaiable from "./routes/unavailable/Unavailable"
-import Navbar from "./components/Navbar/Navbar"
-import MenuItem from "./interfaces/MenuItem.js"
-import { useServerErrorContext } from "./contexts/ServerErrorContext"
-import "./App.scss"
+import React from 'react'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import useDebounce from './hooks/useDebounce'
+import menuService from './services/MenuService'
+import Menu from './routes/menu/Menu'
+import About from './routes/about/About'
+import NotFound from './routes/not-found/NotFound'
+import Unavaiable from './routes/unavailable/Unavailable'
+import Navbar from './components/Navbar/Navbar'
+import MenuItem from './interfaces/MenuItem.js'
+import { useServerErrorContext } from './contexts/ServerErrorContext'
+import './App.scss'
 
 export default function App() {
   const [menuItemsToDisplay, setMenuItemsToDisplay] = useState<MenuItem[]>([])
   const [allMenuItems, setAllMenuItems] = useState<MenuItem[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState('')
   const [activeSearch, setActiveSearch] = useState(false)
   const debounceSearchTerm = useDebounce(searchTerm, 1000)
   const [isVisibleSearchIcon, setIsVisibleSearchIcon] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
-  const [serverError, updateServerError] = useServerErrorContext()
+  const [, updateServerError] = useServerErrorContext()
 
   useEffect(() => {
     loadMenuItems()
   }, [])
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === '/') {
       setIsVisibleSearchIcon(true)
     } else {
       setIsVisibleSearchIcon(false)
@@ -46,7 +46,7 @@ export default function App() {
 
   const loadMenuItems = async () => {
     try {
-      const allMenu = await getAll()
+      const allMenu = await menuService.getAll()
       setAllMenuItems(allMenu)
       setMenuItemsToDisplay(allMenu)
       updateServerError(false)
@@ -58,7 +58,7 @@ export default function App() {
   const searchMenuItem = async (text: string) => {
     if (text.length > 0) {
       const result = allMenuItems.filter((item: MenuItem) => {
-        let regex = new RegExp(text, "i")
+        let regex = new RegExp(text, 'i')
         return regex.test(item.title)
       })
       setMenuItemsToDisplay(result)
@@ -70,12 +70,12 @@ export default function App() {
   const resetToInialValues = () => {
     setAllMenuItems(allMenuItems)
     setMenuItemsToDisplay(allMenuItems)
-    setSearchTerm("")
+    setSearchTerm('')
     setActiveSearch(false)
   }
 
   const navigateToHome = () => {
-    navigate("/")
+    navigate('/')
     if (menuItemsToDisplay.length < 1) {
       loadMenuItems()
       return
@@ -93,10 +93,10 @@ export default function App() {
         goHomePage={navigateToHome}
         isVisibleSearchIcon={isVisibleSearchIcon}
       />
-      <div className="outlet-content">
+      <div className='outlet-content'>
         <Routes>
           <Route
-            path="/"
+            path='/'
             element={
               <Menu
                 menuItems={menuItemsToDisplay}
@@ -105,9 +105,9 @@ export default function App() {
               />
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/unavailable" element={<Unavaiable />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/unavailable' element={<Unavaiable />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
     </>
